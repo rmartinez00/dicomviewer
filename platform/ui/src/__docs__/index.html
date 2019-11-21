@@ -15,15 +15,17 @@
 
   <style>
     /* "Tide" theme */
+
     /* TODO:
     - Convert the other themes to CSS Variables
     - Allow user to set default CSS theme in JS config
     - Export the themes as identical JS objects
     - For theme switcher, update root-level CSS properties via JS (https://medium.com/@_bengarrison/accessing-and-modifying-css-variables-with-javascript-2ccb735bbff0)
     */
+
     :root {
       /* Interface UI Colors */
-      --default-color: #9CCEF9;
+      --default-color: rgb(0, 0, 0);
       --hover-color: #ffffff;
       --active-color: #20A5D6;
       --ui-border-color: #44626F;
@@ -76,8 +78,7 @@
 </head>
 
 <body>
-  <div id="root" />
-  {{ footer }}
+  <div id="root" /> {{ footer }}
 </body>
 
 </html>
