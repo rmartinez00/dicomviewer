@@ -14,7 +14,7 @@ const AboutContent = () => {
   const itemsPreset = () => {
     return [
       {
-        name: t('Repository URL'),
+        name: t('Dicomserver Website'),
         value: 'https://github.com/OHIF/Viewers/',
         link: 'https://github.com/OHIF/Viewers/',
       },
