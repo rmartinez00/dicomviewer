@@ -108,7 +108,7 @@ const definitions = [
   },
   {
     id: 'Cine',
-    label: 'CINE',
+    label: 'CINEMA',
     icon: 'youtube',
     //
     type: TOOLBAR_BUTTON_TYPES.BUILT_IN,
