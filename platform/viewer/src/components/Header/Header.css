@@ -18,6 +18,12 @@
   position: relative;
 }
 
+.header-rigth-box {
+  display: inline-block;
+  position: relative;
+  float: right;
+}
+
 .header-viewerLink {
   float: left;
 }
