@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './PaginationArea.styl';
-import { withTranslation } from '../../utils/LanguageProvider';
+import { withTranslation } from '../../contextProviders';
 
 class TablePagination extends PureComponent {
   static defaultProps = {
@@ -11,7 +11,7 @@ class TablePagination extends PureComponent {
   };
 
   static propTypes = {
-    /* Values to show in "rows per page" select dropdown */
+    /* Values to show in "Rows per page" select dropdown */
     pageOptions: PropTypes.array,
     rowsPerPage: PropTypes.number.isRequired,
     currentPage: PropTypes.number.isRequired,

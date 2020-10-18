@@ -9,6 +9,7 @@ export default class DatasetPicker extends Component {
     error: null,
     loading: true,
     datasets: [],
+    filterStr: '',
   };
 
   static propTypes = {
@@ -41,15 +42,24 @@ export default class DatasetPicker extends Component {
   }
 
   render() {
-    const { datasets, loading, error } = this.state;
+    const { datasets, loading, error, filterStr } = this.state;
     const { onSelect } = this.props;
     return (
-      <DatasetsList
-        datasets={datasets}
-        loading={loading}
-        error={error}
-        onSelect={onSelect}
-      />
+      <div>
+        <input
+          className="form-control gcp-input"
+          type="text"
+          value={filterStr}
+          onChange={e => this.setState({ filterStr: e.target.value })}
+        />
+        <DatasetsList
+          datasets={datasets}
+          loading={loading}
+          error={error}
+          filter={filterStr}
+          onSelect={onSelect}
+        />
+      </div>
     );
   }
 }

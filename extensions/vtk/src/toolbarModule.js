@@ -1,4 +1,5 @@
 import SlabThicknessToolbarComponent from './toolbarComponents/SlabThicknessToolbarComponent';
+import VTKMPRToolbarButton from './toolbarComponents/VTKMPRToolbarButton';
 
 const TOOLBAR_BUTTON_TYPES = {
   COMMAND: 'command',
@@ -22,6 +23,15 @@ const definitions = [
     //
     type: TOOLBAR_BUTTON_TYPES.SET_TOOL_ACTIVE,
     commandName: 'enableLevelTool',
+    commandOptions: {},
+  },
+  {
+    id: 'Reset',
+    label: 'Reset',
+    icon: 'reset',
+    //
+    type: TOOLBAR_BUTTON_TYPES.COMMAND,
+    commandName: 'resetMPRView',
     commandOptions: {},
   },
   {
@@ -114,6 +124,16 @@ const definitions = [
         commandOptions: {},
       },
     ],
+  },
+  {
+    id: '2DMPR',
+    label: '2D MPR',
+    icon: 'cube',
+    //
+    CustomComponent: VTKMPRToolbarButton,
+    type: TOOLBAR_BUTTON_TYPES.COMMAND,
+    commandName: 'mpr2d',
+    context: 'ACTIVE_VIEWPORT::CORNERSTONE',
   },
 ];
 

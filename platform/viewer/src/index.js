@@ -8,6 +8,7 @@ import 'regenerator-runtime/runtime';
 import App from './App.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
+// test
 
 /**
  * EXTENSIONS
@@ -18,35 +19,48 @@ import ReactDOM from 'react-dom';
  * "baked in" to the published application.
  *
  * Depending on your use case/needs, you may want to consider not adding any extensions
- * by default HERE, and instead provide them via the configuration specified at
- * `window.config.extensions`, or by using the exported `App` component, and passing
- * in your extensions as props.
+ * by default HERE, and instead provide them via the extensions configuration key or
+ * by using the exported `App` component, and passing in your extensions as props using
+ * the defaultExtensions property.
  */
 import OHIFVTKExtension from '@ohif/extension-vtk';
 import OHIFDicomHtmlExtension from '@ohif/extension-dicom-html';
+import OHIFDicomSegmentationExtension from '@ohif/extension-dicom-segmentation';
+import OHIFDicomRtExtension from '@ohif/extension-dicom-rt';
 import OHIFDicomMicroscopyExtension from '@ohif/extension-dicom-microscopy';
 import OHIFDicomPDFExtension from '@ohif/extension-dicom-pdf';
+//import OHIFDicomTagBrowserExtension from '@ohif/extension-dicom-tag-browser';
+// Add this for Debugging purposes:
+//import OHIFDebuggingExtension from '@ohif/extension-debugging';
+import { version } from '../package.json';
 
-// Default Settings
+/*
+ * Default Settings
+ */
 let config = {};
-const appDefaults = {
-  routerBasename: '/',
-};
 
 if (window) {
   config = window.config || {};
-  config.extensions = [
+
+  window.version = version;
+}
+
+const appProps = {
+  config,
+  defaultExtensions: [
     OHIFVTKExtension,
     OHIFDicomHtmlExtension,
     OHIFDicomMicroscopyExtension,
     OHIFDicomPDFExtension,
-  ];
-}
+    OHIFDicomSegmentationExtension,
+    OHIFDicomRtExtension,
+    //OHIFDebuggingExtension,
+    //OHIFDicomTagBrowserExtension,
+  ],
+};
 
-const appProps = Object.assign({}, appDefaults, config);
-
-// Create App
+/** Create App */
 const app = React.createElement(App, appProps, null);
 
-// Render
+/** Render */
 ReactDOM.render(app, document.getElementById('root'));

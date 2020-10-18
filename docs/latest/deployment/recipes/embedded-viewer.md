@@ -24,12 +24,12 @@ include tags. Here's how it works:
 </ul>
 
 <ol start="2">
-  <li>Create a JS Object to hold the OHIF Viewer's configuration. Here are some
+  <li>Create a JS Object or Function to hold the OHIF Viewer's configuration. Here are some
    example values that would allow the viewer to hit our public PACS:</li>
 </ol>
 
 ```js
-// Set before importing `ohif-viewer`
+// Set before importing `ohif-viewer` (JS Object)
 window.config = {
   // default: '/'
   routerBasename: '/',
@@ -48,6 +48,9 @@ window.config = {
   },
 };
 ```
+
+To learn more about how you can configure the OHIF Viewer, check out our
+[Configuration Guide](../../configuring/index.md).
 
 <ol start="3"><li>
   Render the viewer in the web page's target <code>div</code>
@@ -98,7 +101,7 @@ extension enabled here][whole-slide-ext-demo] ([source code][ext-code-sandbox])
 and [without it here][whole-slide-base-demo] ([source code][code-sandbox]).
 
 You can read more about extensions and how to create your own in our
-[extensions guide](/advanced/extensions.md).
+[extensions guide](/extensions/index.md).
 
 #### FAQ
 
@@ -123,11 +126,38 @@ globally defined styles/scripts.
 > We're trying to embed the OHIF Viewer into an existing React App, but seeing
 > react-dom and react conflicts. What can we do?
 
+If you are installing OHIF viewer inside another react app, you may use `installViewer` as follows:
+```
+import { installViewer } from '@ohif/viewer'
+
+const ohifViewerConfig = window.config // or set it here
+const containerId = 'ohif'
+const componentRenderedOrUpdatedCallback = function() {
+    console.log('OHIF Viewer rendered/updated');
+};
+
+componentDidMount() {
+   installViewer(
+      ohifViewerConfig,
+      containerId,
+      componentRenderedOrUpdatedCallback
+    );
+}
+
+render () {
+   ...
+   //you can render in any element you wish
+   <AnyTag id={containerId}/>
+}
+
+```
+
 `installViewer` is a convenience method that pulls in some dependencies that may
 not be compatible with existing `react` apps. `@ohif/viewer` also exports `App`
 which is a react component that takes the `configuration` outlined above as
 props. You can use it as a reusable component, and to avoid `react` version
 conflict issues.
+
 
 <!--
   LINKS

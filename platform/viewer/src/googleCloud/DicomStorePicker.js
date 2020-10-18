@@ -10,12 +10,13 @@ export default class DicomStorePicker extends Component {
     loading: true,
     stores: [],
     locations: [],
+    filterStr: '',
   };
 
   static propTypes = {
     dataset: PropTypes.object,
     onSelect: PropTypes.func,
-    accessToken: PropTypes.string.isRequired
+    accessToken: PropTypes.string.isRequired,
   };
 
   async componentDidMount() {
@@ -38,16 +39,25 @@ export default class DicomStorePicker extends Component {
   }
 
   render() {
-    const { stores, loading, error } = this.state;
+    const { stores, loading, error, filterStr } = this.state;
     const { onSelect } = this.props;
 
     return (
-      <DicomStoreList
-        stores={stores}
-        loading={loading}
-        error={error}
-        onSelect={onSelect}
-      />
+      <div>
+        <input
+          className="form-control gcp-input"
+          type="text"
+          value={filterStr}
+          onChange={e => this.setState({ filterStr: e.target.value })}
+        />
+        <DicomStoreList
+          stores={stores}
+          loading={loading}
+          error={error}
+          filter={filterStr}
+          onSelect={onSelect}
+        />
+      </div>
     );
   }
 }

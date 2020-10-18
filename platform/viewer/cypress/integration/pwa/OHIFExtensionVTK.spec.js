@@ -1,42 +1,35 @@
 describe('OHIF VTK Extension', () => {
   before(() => {
-    cy.openStudy('Juno');
-    cy.waitDicomImage();
+    cy.checkStudyRouteInViewer(
+      '1.3.6.1.4.1.25403.345050719074.3824.20170125113417.1'
+    );
     cy.expectMinimumThumbnails(7);
-  });
 
-  beforeEach(() => {
+    //Waiting for the desired thumbnail content to be displayed
+    cy.get('[data-cy="thumbnail-list"]').should($list => {
+      expect($list).to.contain('CT WB 5.0  B35f');
+    });
+
     // TODO: We shouldn't have to drag the thumbnail
     // This is a known bug; 2D MPR button does not show until viewport
     // has data from a drag-n-drop
-    // Drag and drop first thumbnail into first viewport
-    cy.get('[data-cy="thumbnail-list"]:nth-child(3)').drag(
-      '.viewport-drop-target'
-    );
+    // Drag and drop third thumbnail into first viewport
+    cy.get('[data-cy="thumbnail-list"]')
+      .contains('CT WB 5.0  B35f')
+      .drag('.viewport-drop-target');
 
-    cy.get('.PluginSwitch > .toolbar-button')
-      .as('twodmprBtn')
-      .should('be.visible')
-      .then(btn => {
-        if (!btn.text().includes('Exit')) {
-          btn.click();
-        }
-      });
+    //Select 2D MPR button
+    cy.get('[data-cy="2d mpr"]').click();
 
+    //Wait waitVTKLoading Images
+    cy.waitVTKLoading();
+  });
+
+  beforeEach(() => {
     cy.initVTKToolsAliases();
   });
 
   it('checks if VTK buttons are displayed on the toolbar', () => {
-    // Wait for start reformatting
-    cy.get('[data-cy="viewprt-grid"]', { timeout: 10000 }).should($grid => {
-      expect($grid).to.contain.text('Reform');
-    });
-
-    // Wait for finish reformatting
-    cy.get('[data-cy="viewprt-grid"]', { timeout: 30000 }).should($grid => {
-      expect($grid).not.to.contain.text('Reform');
-    });
-
     cy.get('@crosshairsBtn')
       .should('be.visible')
       .contains('Crosshairs');
@@ -56,8 +49,64 @@ describe('OHIF VTK Extension', () => {
     cy.get('@layoutBtn')
       .should('be.visible')
       .contains('Layout');
+  });
 
-    cy.wait(3000);
-    cy.percyCanvasSnapshot('VTK Extension');
+  it('checks Crosshairs tool', () => {
+    cy.get('@crosshairsBtn').click();
+
+    // Click and Move the mouse inside the viewport
+    cy.get('[data-cy="viewport-container-0"]')
+      .trigger('mousedown', 'center', {
+        which: 1,
+      })
+      .trigger('mousemove', 'top', {
+        which: 1,
+      })
+      .trigger('mouseup');
+
+    //Take Screenshot
+    cy.screenshot(
+      "VTK Crosshairs tool - Should display crosshairs' green lines"
+    );
+  });
+
+  it('checks WWWC tool', () => {
+    cy.get('@wwwcBtn').click();
+
+    //Initial label in the viewport
+    const initialLabelText = 'W: 350 L: 40';
+
+    // Click and Move the mouse inside the viewport
+    cy.get('[data-cy="viewport-container-0"]')
+      .trigger('mousedown', 'center', { which: 1 })
+      .trigger('mousemove', 'top', { which: 1 })
+      .trigger('mousedown', 'center', { which: 1 })
+      .trigger('mousemove', 'top', { which: 1 })
+      .trigger('mouseup', { which: 1 })
+      .then(() => {
+        cy.get('.ViewportOverlay > div.bottom-right.overlay-element').should(
+          'not.have.text',
+          initialLabelText
+        );
+      });
+  });
+
+  it('checks Rotate tool', () => {
+    cy.get('@rotateBtn').click();
+
+    // Click and Move the mouse inside the viewport
+    cy.get('[data-cy="viewport-container-0"]')
+      .trigger('mousedown', 'center', {
+        which: 1,
+      })
+      .trigger('mousemove', 'top', { which: 1 })
+      .trigger('mousedown', 'center', {
+        which: 1,
+      })
+      .trigger('mousemove', 'top', { which: 1 })
+      .trigger('mouseup', { which: 1 });
+
+    //Take Screenshot
+    cy.screenshot('VTK Rotate tool - Should rotate image');
   });
 });

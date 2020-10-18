@@ -3,11 +3,22 @@ import './StudyList.styl';
 import React from 'react';
 import classNames from 'classnames';
 import TableSearchFilter from './TableSearchFilter.js';
-import useMedia from '../../hooks/useMedia.js';
 import PropTypes from 'prop-types';
 import { StudyListLoadingText } from './StudyListLoadingText.js';
-import { withTranslation } from '../../utils/LanguageProvider';
+import { useTranslation } from 'react-i18next';
 
+const getContentFromUseMediaValue = (
+  displaySize,
+  contentArrayMap,
+  defaultContent
+) => {
+  const content =
+    displaySize in contentArrayMap
+      ? contentArrayMap[displaySize]
+      : defaultContent;
+
+  return content;
+};
 /**
  *
  *
@@ -24,33 +35,33 @@ function StudyList(props) {
     filterValues,
     onFilterChange: handleFilterChange,
     onSelectItem: handleSelectItem,
-    t,
-    //
     studyListDateFilterNumDays,
+    displaySize,
   } = props;
+  const { t, ready: translationsAreReady } = useTranslation('StudyList');
 
   const largeTableMeta = [
     {
       displayText: t('PatientName'),
-      fieldName: 'patientName',
+      fieldName: 'PatientName',
       inputType: 'text',
       size: 330,
     },
     {
       displayText: t('MRN'),
-      fieldName: 'patientId',
+      fieldName: 'PatientID',
       inputType: 'text',
       size: 378,
     },
     {
       displayText: t('AccessionNumber'),
-      fieldName: 'accessionNumber',
+      fieldName: 'AccessionNumber',
       inputType: 'text',
       size: 180,
     },
     {
       displayText: t('StudyDate'),
-      fieldName: 'studyDate',
+      fieldName: 'StudyDate',
       inputType: 'date-range',
       size: 300,
     },
@@ -62,7 +73,7 @@ function StudyList(props) {
     },
     {
       displayText: t('StudyDescription'),
-      fieldName: 'studyDescription',
+      fieldName: 'StudyDescription',
       inputType: 'text',
       size: 335,
     },
@@ -70,20 +81,20 @@ function StudyList(props) {
 
   const mediumTableMeta = [
     {
-      displayText: 'Patient / MRN',
+      displayText: `${t('PatientName')} / ${t('MRN')}`,
       fieldName: 'patientNameOrId',
       inputType: 'text',
       size: 250,
     },
     {
-      displayText: 'Description',
+      displayText: t('Description'),
       fieldName: 'accessionOrModalityOrDescription',
       inputType: 'text',
       size: 350,
     },
     {
       displayText: t('StudyDate'),
-      fieldName: 'studyDate',
+      fieldName: 'StudyDate',
       inputType: 'date-range',
       size: 300,
     },
@@ -91,16 +102,16 @@ function StudyList(props) {
 
   const smallTableMeta = [
     {
-      displayText: 'Search',
+      displayText: t('Search'),
       fieldName: 'allFields',
       inputType: 'text',
       size: 100,
     },
   ];
 
-  const tableMeta = useMedia(
-    ['(min-width: 1750px)', '(min-width: 1000px)', '(min-width: 768px)'],
-    [largeTableMeta, mediumTableMeta, smallTableMeta],
+  const tableMeta = getContentFromUseMediaValue(
+    displaySize,
+    { large: largeTableMeta, medium: mediumTableMeta, small: smallTableMeta },
     smallTableMeta
   );
 
@@ -108,7 +119,7 @@ function StudyList(props) {
     .map(field => field.size)
     .reduce((prev, next) => prev + next);
 
-  return (
+  return translationsAreReady ? (
     <table className="table table--striped table--hoverable">
       <colgroup>
         {tableMeta.map((field, i) => {
@@ -167,21 +178,21 @@ function StudyList(props) {
         {!isLoading &&
           studies.map((study, index) => (
             <TableRow
-              key={`${study.studyInstanceUid}-${index}`}
-              onClick={studyInstanceUid => handleSelectItem(studyInstanceUid)}
-              accessionNumber={study.accessionNumber || ''}
+              key={`${study.StudyInstanceUID}-${index}`}
+              onClick={StudyInstanceUID => handleSelectItem(StudyInstanceUID)}
+              AccessionNumber={study.AccessionNumber || ''}
               modalities={study.modalities}
-              patientId={study.patientId || ''}
-              patientName={study.patientName || ''}
-              studyDate={study.studyDate}
-              studyDescription={study.studyDescription || ''}
-              studyInstanceUid={study.studyInstanceUid}
-              t={t}
+              PatientID={study.PatientID || ''}
+              PatientName={study.PatientName || ''}
+              StudyDate={study.StudyDate}
+              StudyDescription={study.StudyDescription || ''}
+              StudyInstanceUID={study.StudyInstanceUID}
+              displaySize={displaySize}
             />
           ))}
       </tbody>
     </table>
-  );
+  ) : null;
 }
 
 StudyList.propTypes = {
@@ -197,63 +208,67 @@ StudyList.propTypes = {
   onSort: PropTypes.func.isRequired,
   // ~~ FILTERS
   filterValues: PropTypes.shape({
-    patientName: PropTypes.string.isRequired,
-    patientId: PropTypes.string.isRequired,
-    accessionNumber: PropTypes.string.isRequired,
-    studyDate: PropTypes.string.isRequired,
+    PatientName: PropTypes.string.isRequired,
+    PatientID: PropTypes.string.isRequired,
+    AccessionNumber: PropTypes.string.isRequired,
+    StudyDate: PropTypes.string.isRequired,
     modalities: PropTypes.string.isRequired,
-    studyDescription: PropTypes.string.isRequired,
+    StudyDescription: PropTypes.string.isRequired,
     patientNameOrId: PropTypes.string.isRequired,
     accessionOrModalityOrDescription: PropTypes.string.isRequired,
     allFields: PropTypes.string.isRequired,
+    studyDateTo: PropTypes.any,
+    studyDateFrom: PropTypes.any,
   }).isRequired,
   onFilterChange: PropTypes.func.isRequired,
-  //
   studyListDateFilterNumDays: PropTypes.number,
+  displaySize: PropTypes.string,
 };
 
 StudyList.defaultProps = {};
 
 function TableRow(props) {
   const {
-    accessionNumber,
+    AccessionNumber,
     isHighlighted,
     modalities,
-    patientId,
-    patientName,
-    studyDate,
-    studyDescription,
-    studyInstanceUid,
+    PatientID,
+    PatientName,
+    StudyDate,
+    StudyDescription,
+    StudyInstanceUID,
     onClick: handleClick,
-    t,
+    displaySize,
   } = props;
+
+  const { t } = useTranslation('StudyList');
 
   const largeRowTemplate = (
     <tr
-      onClick={() => handleClick(studyInstanceUid)}
+      onClick={() => handleClick(StudyInstanceUID)}
       className={classNames({ active: isHighlighted })}
     >
-      <td className={classNames({ 'empty-value': !patientName })}>
-        {patientName || `(${t('Empty')})`}
+      <td className={classNames({ 'empty-value': !PatientName })}>
+        {PatientName || `(${t('Empty')})`}
       </td>
-      <td>{patientId}</td>
-      <td>{accessionNumber}</td>
-      <td>{studyDate}</td>
+      <td>{PatientID}</td>
+      <td>{AccessionNumber}</td>
+      <td>{StudyDate}</td>
       <td className={classNames({ 'empty-value': !modalities })}>
         {modalities || `(${t('Empty')})`}
       </td>
-      <td>{studyDescription}</td>
+      <td>{StudyDescription}</td>
     </tr>
   );
 
   const mediumRowTemplate = (
     <tr
-      onClick={() => handleClick(studyInstanceUid)}
+      onClick={() => handleClick(StudyInstanceUID)}
       className={classNames({ active: isHighlighted })}
     >
-      <td className={classNames({ 'empty-value': !patientName })}>
-        {patientName || `(${t('Empty')})`}
-        <div style={{ color: '#60656f' }}>{patientId}</div>
+      <td className={classNames({ 'empty-value': !PatientName })}>
+        {PatientName || `(${t('Empty')})`}
+        <div style={{ color: '#60656f' }}>{PatientID}</div>
       </td>
       <td>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -265,7 +280,7 @@ function TableRow(props) {
               flexGrow: 1,
             }}
           >
-            {studyDescription}
+            {StudyDescription}
           </div>
 
           {/* MODALITY & ACCESSION */}
@@ -293,35 +308,35 @@ function TableRow(props) {
                 whiteSpace: 'nowrap',
                 overflow: 'hidden',
               }}
-              aria-label={accessionNumber}
-              title={accessionNumber}
+              aria-label={AccessionNumber}
+              title={AccessionNumber}
             >
-              {accessionNumber}
+              {AccessionNumber}
             </div>
           </div>
         </div>
       </td>
       {/* DATE */}
-      <td style={{ textAlign: 'center' }}>{studyDate}</td>
+      <td style={{ textAlign: 'center' }}>{StudyDate}</td>
     </tr>
   );
 
   const smallRowTemplate = (
     <tr
-      onClick={() => handleClick(studyInstanceUid)}
+      onClick={() => handleClick(StudyInstanceUID)}
       className={classNames({ active: isHighlighted })}
     >
       <td style={{ position: 'relative', overflow: 'hidden' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           {/* NAME AND ID */}
           <div
-            className={classNames({ 'empty-value': !patientName })}
+            className={classNames({ 'empty-value': !PatientName })}
             style={{ width: '150px', minWidth: '150px' }}
           >
             <div style={{ fontWeight: 500, paddingTop: '3px' }}>
-              {patientName || `(${t('Empty')})`}
+              {PatientName || `(${t('Empty')})`}
             </div>
-            <div style={{ color: '#60656f' }}>{patientId}</div>
+            <div style={{ color: '#60656f' }}>{PatientID}</div>
           </div>
 
           {/* DESCRIPTION */}
@@ -333,7 +348,7 @@ function TableRow(props) {
               paddingLeft: '35px',
             }}
           >
-            {studyDescription}
+            {StudyDescription}
           </div>
 
           {/* MODALITY & DATE */}
@@ -355,16 +370,20 @@ function TableRow(props) {
             >
               {modalities || `(${t('Empty')})`}
             </div>
-            <div>{studyDate}</div>
+            <div>{StudyDate}</div>
           </div>
         </div>
       </td>
     </tr>
   );
 
-  const rowTemplate = useMedia(
-    ['(min-width: 1750px)', '(min-width: 1000px)', '(min-width: 768px)'],
-    [largeRowTemplate, mediumRowTemplate, smallRowTemplate],
+  const rowTemplate = getContentFromUseMediaValue(
+    displaySize,
+    {
+      large: largeRowTemplate,
+      medium: mediumRowTemplate,
+      small: smallRowTemplate,
+    },
     smallRowTemplate
   );
 
@@ -372,19 +391,19 @@ function TableRow(props) {
 }
 
 TableRow.propTypes = {
-  accessionNumber: PropTypes.string.isRequired,
+  AccessionNumber: PropTypes.string.isRequired,
   isHighlighted: PropTypes.bool,
   modalities: PropTypes.string,
-  patientId: PropTypes.string.isRequired,
-  patientName: PropTypes.string.isRequired,
-  studyDate: PropTypes.string.isRequired,
-  studyDescription: PropTypes.string.isRequired,
-  studyInstanceUid: PropTypes.string.isRequired,
+  PatientID: PropTypes.string.isRequired,
+  PatientName: PropTypes.string.isRequired,
+  StudyDate: PropTypes.string.isRequired,
+  StudyDescription: PropTypes.string.isRequired,
+  StudyInstanceUID: PropTypes.string.isRequired,
+  displaySize: PropTypes.string,
 };
 
 TableRow.defaultProps = {
   isHighlighted: false,
 };
 
-const connectedComponent = withTranslation('StudyList')(StudyList);
-export { connectedComponent as StudyList };
+export { StudyList };

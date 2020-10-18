@@ -89,7 +89,7 @@ yarn start
 
 For more advanced local development scenarios, like using your own locally
 hosted PACS and test data,
-[check out our Essential: Getting Started](https://docs.ohif.org/essentials/getting-started.html)
+[check out our Essential: Getting Started](https://docs.ohif.org/getting-started.html)
 guide.
 
 ### E2E Tests
@@ -115,13 +115,13 @@ Commands to run the tests:
 
 ```js
 // Open Cypress Dashboard that provides insight into what happened when your tests ran
-yarn run cy
+yarn test:e2e
 
 // Run all tests using Electron browser headless
-yarn run cy:run
+yarn test:e2e:local
 
 // Run all tests in CI mode
-yarn run cy:run:ci
+yarn run test:e2e:ci
 ```
 
 ### Contributing
@@ -129,7 +129,7 @@ yarn run cy:run:ci
 > Large portions of the Viewer's functionality are maintained in other
 > repositories. To get a better understanding of the Viewer's architecture and
 > "where things live", read
-> [our docs on the Viewer's architecture](https://docs.ohif.org/advanced/architecture.html#diagram)
+> [our docs on the Viewer's architecture](https://docs.ohif.org/architecture/index.html#overview)
 
 It is notoriously difficult to setup multiple dependent repositories for
 end-to-end testing and development. That's why we recommend writing and running
@@ -194,8 +194,8 @@ Links:
 [react-url]: https://reactjs.org/
 [pwa-url]: https://developers.google.com/web/progressive-web-apps/
 [ohif-viewer-url]: https://www.npmjs.com/package/ohif-viewer
-[configuration-url]: https://docs.ohif.org/essentials/configuration.html
-[extensions-url]: https://docs.ohif.org/advanced/extensions.html
+[configuration-url]: https://docs.ohif.org/configuring/
+[extensions-url]: https://docs.ohif.org/extensions
 <!-- Misc. -->
 [react-viewer]: https://github.com/OHIF/Viewers/tree/react
 <!-- Issue Boilerplate -->
