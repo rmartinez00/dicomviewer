@@ -9,12 +9,12 @@ function OHIFLogo() {
       target="_blank"
       rel="noopener noreferrer"
       className="header-brand"
-      href="http://ohif.org"
+      href="http://ohifo.org"
     >
       <Icon name="ohif-logo" className="header-logo-image" />
       {/* Logo text would fit smaller displays at two lines:
        *
-       * Open Health
+       * Open Healthooooo
        * Imaging Foundation
        *
        * Or as `OHIF` on really small displays
