@@ -1,9 +1,9 @@
 // These should be overridden by the implementation
 let user = {
-  userLoggedIn: () => false,
-  getUserId: () => null,
-  getName: () => null,
-  getAccessToken: () => null,
+  userLoggedIn: () => true,
+  getUserId: () => 1,
+  getName: () => 'dicom',
+  getAccessToken: () => window.userToken,
   login: () => new Promise((resolve, reject) => reject()),
   logout: () => new Promise((resolve, reject) => reject()),
   getData: key => null,

@@ -117,6 +117,17 @@ const definitions = [
     },
   },
   {
+    id: 'Download',
+    label: 'Download',
+    icon: 'create-screen-capture',
+    //
+    type: TOOLBAR_BUTTON_TYPES.BUILT_IN,
+    options: {
+      behavior: TOOLBAR_BUTTON_BEHAVIORS.DOWNLOAD_SCREEN_SHOT,
+      togglable: true,
+    },
+  },
+  {
     id: 'More',
     label: 'More',
     icon: 'ellipse-circle',
@@ -214,17 +225,6 @@ const definitions = [
         type: TOOLBAR_BUTTON_TYPES.SET_TOOL_ACTIVE,
         commandName: 'setToolActive',
         commandOptions: { toolName: 'Bidirectional' },
-      },
-      {
-        id: 'Download',
-        label: 'Download',
-        icon: 'create-screen-capture',
-        //
-        type: TOOLBAR_BUTTON_TYPES.BUILT_IN,
-        options: {
-          behavior: TOOLBAR_BUTTON_BEHAVIORS.DOWNLOAD_SCREEN_SHOT,
-          togglable: true,
-        },
       },
     ],
   },
