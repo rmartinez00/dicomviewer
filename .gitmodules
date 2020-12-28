@@ -1,0 +1,3 @@
+[submodule "cornerstone-web-image-loader"]
+	path = cornerstone-web-image-loader
+	url = git@github.com:dougyau/cornerstoneWebImageLoader.git

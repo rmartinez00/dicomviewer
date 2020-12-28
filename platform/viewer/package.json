@@ -89,6 +89,7 @@
     "redux-oidc": "3.1.x",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
+    "cornerstone-web-image-loader": "file:../../cornerstone-web-image-loader",
     "vtk.js": "^11.14.0"
   },
   "devDependencies": {
