@@ -9,9 +9,9 @@ window.config = {
     dicomWeb: [
       {
         name: 'DCM4CHEE',
-        wadoUriRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/wado',
-        qidoRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs',
-        wadoRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs',
+        wadoUriRoot: 'https://wado.dicomserver.drvdev.com/wado',
+        qidoRoot: 'https://wado.dicomserver.drvdev.com/dicom-web',
+        wadoRoot: 'https://wado.dicomserver.drvdev.com/dicom-web',
         qidoSupportsIncludeField: true,
         imageRendering: 'wadors',
         thumbnailRendering: 'wadors',
@@ -118,6 +118,7 @@ window.config = {
     },
   ],
   cornerstoneExtensionConfig: {},
+  userToken: window.userTokeno,
   // Following property limits number of simultaneous series metadata requests.
   // For http/1.x-only servers, set this to 5 or less to improve
   //  on first meaningful display in viewer
