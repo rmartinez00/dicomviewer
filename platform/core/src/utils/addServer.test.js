@@ -5,9 +5,9 @@ describe('addServers', () => {
     dicomWeb: [
       {
         name: 'DCM4CHEE',
-        wadoUriRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/wado',
-        qidoRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs',
-        wadoRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs',
+        wadoUriRoot: 'https://wado-dicomserver.drvdev.com/wado',
+        qidoRoot: 'https://wado-dicomserver.drvdev.com/dicom-web',
+        wadoRoot: 'https://wado-dicomserver.drvdev.com/dicom-web',
         qidoSupportsIncludeField: true,
         imageRendering: 'wadors',
         thumbnailRendering: 'wadors',
