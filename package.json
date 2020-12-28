@@ -3,7 +3,8 @@
   "private": true,
   "workspaces": [
     "platform/*",
-    "extensions/*"
+    "extensions/*",
+    "react-vtkjs-viewport"
   ],
   "engines": {
     "node": ">=10",

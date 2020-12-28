@@ -1,3 +1,7 @@
 [submodule "cornerstone-web-image-loader"]
 	path = cornerstone-web-image-loader
 	url = git@github.com:dougyau/cornerstoneWebImageLoader.git
+[submodule "react-vtkjs-viewport"]
+	path = react-vtkjs-viewport
+	url = git@github.com:dougyau/react-vtkjs-viewport.git
+	branch = master
