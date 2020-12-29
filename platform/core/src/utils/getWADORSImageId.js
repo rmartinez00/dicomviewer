@@ -27,10 +27,7 @@ function getWADORSImageUrl(instance, frame) {
  * @returns {string} The imageId to be used by Cornerstone
  */
 export default function getWADORSImageId(instance, frame) {
-  const uri = getWADORSImageUrl(instance, frame)
-    .replace('series/', '')
-    .replace('instances/', '')
-    .replace('frames/', '');
+  let uri = getWADORSImageUrl(instance, frame);
 
   if (!uri) {
     return;
