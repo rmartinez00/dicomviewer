@@ -9,9 +9,8 @@ window.config = {
       {
         name: 'DCM4CHEE',
         // qidoRoot: 'https://fuxelquned.execute-api.us-east-1.amazonaws.com/Stage/rs',
-        qidoRoot:
-          'https://u22gncr79j.execute-api.us-east-1.amazonaws.com/Stage/rs',
-        wadoRoot: 'https://dicomserver-demo-pacs.s3.amazonaws.com',
+        qidoRoot: 'https://qido-demo.dicomserver.net/rs',
+        wadoRoot: 'https://static-demo.dicomserver.net',
         qidoSupportsIncludeField: true,
         imageRendering: 'wadors',
         thumbnailRendering: 'wadors',
