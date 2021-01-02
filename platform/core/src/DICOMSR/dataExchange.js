@@ -55,7 +55,7 @@ const storeMeasurements = async (measurementData, filter, server) => {
     return Promise.reject({});
   }
 
-  const serverUrl = server.wadoRoot;
+  const serverUrl = server.qidoRoot;
   const firstMeasurementKey = Object.keys(measurementData)[0];
   const firstMeasurement = measurementData[firstMeasurementKey][0];
   const StudyInstanceUID =
