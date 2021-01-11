@@ -30,7 +30,6 @@ export default function getAuthorizationHeader({ requestOptions } = {}) {
     headers.Authorization = `Bearer ${accessToken}`;
   }
 
-  // headers["X-Dicomserver-Auth"] = window.config.userToken;
 
   return headers;
 }
