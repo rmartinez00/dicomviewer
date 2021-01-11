@@ -8,9 +8,8 @@ window.config = {
     dicomWeb: [
       {
         name: 'DCM4CHEE',
-        wadoUriRoot: 'https://wado.dicomserver.drvdev.com/wado',
-        qidoRoot: 'https://wado.dicomserver.drvdev.com/dicom-web',
-        wadoRoot: 'https://wado.dicomserver.drvdev.com/dicom-web',
+        qidoRoot: 'https://static-demo.dicomserver.net/rs',
+        wadoRoot: 'https://static-demo.dicomserver.net',
         qidoSupportsIncludeField: true,
         imageRendering: 'wadors',
         thumbnailRendering: 'wadors',
