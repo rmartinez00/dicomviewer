@@ -119,6 +119,16 @@ const commandsModule = ({ commandsManager }) => {
       storeContexts: ['viewports'],
       options: { preset: 9 },
     },
+    windowLevelPreset10: {
+      commandFn: actions.setWindowLevelPreset,
+      storeContexts: ['viewports'],
+      options: { preset: 10 },
+    },
+    windowLevelPreset11: {
+      commandFn: actions.setWindowLevelPreset,
+      storeContexts: ['viewports'],
+      options: { preset: 11 },
+    },
     nextViewportDisplaySet: {
       commandFn: actions.updateViewportDisplaySet,
       storeContexts: ['viewports'],
