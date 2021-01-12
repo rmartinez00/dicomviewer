@@ -77,18 +77,6 @@ class MeasurementTable extends Component {
         <ScrollableArea>
           <div>{this.getMeasurementsGroups()}</div>
         </ScrollableArea>
-        <div className="measurementTableFooter">
-          {saveFunction && (
-            <button
-              onClick={this.saveFunction}
-              className="saveBtn"
-              data-cy="save-measurements-btn"
-            >
-              <Icon name="save" width="14px" height="14px" />
-              Save measurements
-            </button>
-          )}
-        </div>
       </div>
     );
   }
@@ -171,7 +159,7 @@ class MeasurementTable extends Component {
     return (
       <React.Fragment>
         <div className="tableListHeaderTitle">
-          {this.props.t(measureGroup.groupName)}
+          {this.props.t("medidas")}
         </div>
         {measureGroup.maxMeasurements && (
           <div className="maxMeasurements">
@@ -189,7 +177,7 @@ class MeasurementTable extends Component {
     return timepoints.map((timepoint, index) => {
       return (
         <div key={index} className="measurementTableHeaderItem">
-          <div className="timepointLabel">{t(timepoint.key)}</div>
+          <div className="timepointLabel">{"Fecha de Estudio"}</div>
           <div className="timepointDate">{timepoint.date}</div>
         </div>
       );
