@@ -113,7 +113,8 @@ const _paletteColorCache = {
 };
 
 function _getPaletteColor(server, paletteColorLookupTableData, lutDescriptor) {
-  const numLutEntries = lutDescriptor[0];
+  const numLutEntries =
+    lutDescriptor[0] === 0 ? Math.pow(2, 16) : lutDescriptor[0];
   const bits = lutDescriptor[2];
 
   const arrayBufferToPaletteColorLUT = arraybuffer => {
