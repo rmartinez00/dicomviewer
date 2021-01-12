@@ -9,7 +9,8 @@ window.config = {
     dicomWeb: [
       {
         name: 'DCM4CHEE',
-        qidoRoot: 'https://static-demo.dicomserver.net/rs',
+        qidoRoot: 'https://static-demo.dicomserver.net',
+        //qidoRoot: 'https://hc3syy7af9.execute-api.us-east-1.amazonaws.com/Stage/rs',
         wadoRoot: 'https://static-demo.dicomserver.net',
         qidoSupportsIncludeField: true,
         imageRendering: 'wadors',
