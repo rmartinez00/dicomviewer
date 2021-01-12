@@ -127,7 +127,7 @@ const definitions = [
   },
   {
     id: '2DMPR',
-    label: '2D MPR',
+    label: 'Recons',
     icon: 'cube',
     //
     CustomComponent: VTKMPRToolbarButton,

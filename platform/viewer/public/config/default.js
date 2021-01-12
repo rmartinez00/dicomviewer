@@ -115,6 +115,16 @@ window.config = {
       label: 'W/L Preset 9',
       keys: ['9'],
     },
+    {
+      commandName: 'windowLevelPreset10',
+      label: 'W/L Preset 10',
+      keys: ['0'],
+    },
+    {
+      commandName: 'windowLevelPreset11',
+      label: 'W/L Preset 11',
+      keys: ['q'],
+    },
   ],
   cornerstoneExtensionConfig: {},
   userToken: window.userTokeno,
