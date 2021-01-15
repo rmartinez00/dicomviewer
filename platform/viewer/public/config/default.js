@@ -8,9 +8,9 @@ window.config = {
     dicomWeb: [
       {
         name: 'DCM4CHEE',
-        qidoRoot: 'https://static-demo.dicomserver.net',
-        //qidoRoot: 'https://hc3syy7af9.execute-api.us-east-1.amazonaws.com/Stage/rs',
-        wadoRoot: 'https://static-demo.dicomserver.net',
+        qidoRoot: 'add_url_here',
+        //qidoRoot: 'add_url_here',
+        wadoRoot: 'add_url_here',
         qidoSupportsIncludeField: true,
         imageRendering: 'wadors',
         thumbnailRendering: 'wadors',
@@ -58,7 +58,7 @@ window.config = {
     // firstImage
     // lastImage
     {
-      commandName: 'previousViewportDisplaySet',
+      commandName: 'c',
       label: 'Previous Series',
       keys: ['pagedown'],
     },
