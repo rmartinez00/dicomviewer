@@ -1,6 +1,5 @@
 import React from 'react';
-import { asyncComponent, retryImport } from '@ohif/ui';
-
+import asyncComponent from './asyncComponent.js';
 import commandsModule from './commandsModule.js';
 import toolbarModule from './toolbarModule.js';
 import withCommandsManager from './withCommandsManager.js';
@@ -9,7 +8,7 @@ import { version } from '../package.json';
 // import loadLocales from './loadLocales';
 
 const OHIFVTKViewport = asyncComponent(() =>
-  retryImport(() => import(/* webpackChunkName: "OHIFVTKViewport" */ './OHIFVTKViewport.js'))
+  import(/* webpackChunkName: "OHIFVTKViewport" */ './OHIFVTKViewport.js')
 );
 
 const vtkExtension = {
