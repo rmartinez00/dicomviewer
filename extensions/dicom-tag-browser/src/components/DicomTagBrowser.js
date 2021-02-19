@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { classes, cornerstone as OHIFCornerstone } from '@ohif/core';
+import { classes } from '@ohif/core';
 import dcmjs from 'dcmjs';
 import DicomBrowserSelect from './DicomBrowserSelect';
 import moment from 'moment';
@@ -10,8 +10,6 @@ const { ImageSet } = classes;
 const { DicomMetaDictionary } = dcmjs.data;
 const { nameMap } = DicomMetaDictionary;
 
-const { metadataProvider } = OHIFCornerstone;
-
 const DicomTagBrowser = ({ displaySets, displaySetInstanceUID }) => {
   const [
     activeDisplaySetInstanceUID,
@@ -19,7 +17,6 @@ const DicomTagBrowser = ({ displaySets, displaySetInstanceUID }) => {
   ] = useState(displaySetInstanceUID);
   const [activeInstance, setActiveInstance] = useState(0);
   const [tags, setTags] = useState([]);
-  const [meta, setMeta] = useState('');
   const [instanceList, setInstanceList] = useState([]);
   const [displaySetList, setDisplaySetList] = useState([]);
   const [isImageStack, setIsImageStack] = useState(false);
@@ -86,7 +83,6 @@ const DicomTagBrowser = ({ displaySets, displaySetInstanceUID }) => {
     }
 
     setTags(getSortedTags(metadata));
-    setMeta(metadata);
     setInstanceList(instanceList);
     setDisplaySetList(newDisplaySetList);
     setIsImageStack(isImageStack);
@@ -118,43 +114,41 @@ const DicomTagBrowser = ({ displaySets, displaySetInstanceUID }) => {
         options={displaySetList}
       />
       {instanceSelectList}
-      <DicomTagTable tags={tags} meta={meta}></DicomTagTable>
+      <DicomTagTable tags={tags}></DicomTagTable>
     </div>
   );
 };
 
-function DicomTagTable({ tags, meta }) {
-  const rows = getFormattedRowsFromTags(tags, meta);
+function DicomTagTable({ tags }) {
+  const rows = getFormattedRowsFromTags(tags);
 
   return (
     <div>
       <table className="dicom-tag-browser-table">
-        <tbody>
-          <tr>
-            <th className="dicom-tag-browser-table-left">Tag</th>
-            <th className="dicom-tag-browser-table-left">Value Representation</th>
-            <th className="dicom-tag-browser-table-left">Keyword</th>
-            <th className="dicom-tag-browser-table-left">Value</th>
-          </tr>
-          {rows.map((row, index) => {
-            const className = row.className ? row.className : null;
+        <tr>
+          <th className="dicom-tag-browser-table-left">Tag</th>
+          <th className="dicom-tag-browser-table-left">Value Representation</th>
+          <th className="dicom-tag-browser-table-left">Keyword</th>
+          <th className="dicom-tag-browser-table-left">Value</th>
+        </tr>
+        {rows.map(row => {
+          const className = row.className ? row.className : null;
 
-            return (
-              <tr className={className} key={`DICOMTagRow-${index}`}>
-                <td>{row[0]}</td>
-                <td className="dicom-tag-browser-table-center">{row[1]}</td>
-                <td>{row[2]}</td>
-                <td>{row[3]}</td>
-              </tr>
-            );
-          })}
-        </tbody>
+          return (
+            <tr className={className}>
+              <td>{row[0]}</td>
+              <td className="dicom-tag-browser-table-center">{row[1]}</td>
+              <td>{row[2]}</td>
+              <td>{row[3]}</td>
+            </tr>
+          );
+        })}
       </table>
     </div>
   );
 }
 
-function getFormattedRowsFromTags(tags, meta) {
+function getFormattedRowsFromTags(tags) {
   const rows = [];
 
   tags.forEach(tagInfo => {
@@ -181,17 +175,6 @@ function getFormattedRowsFromTags(tags, meta) {
         rows.push(...formatedRowsFromTags);
       });
     } else {
-      if (tagInfo.vr === 'xs') {
-        try {
-          const dataset = metadataProvider.getStudyDataset(meta.StudyInstanceUID);
-          const tag = dcmjs.data.Tag.fromPString(tagInfo.tag).toCleanString();
-          const originalTagInfo = dataset[tag];
-          tagInfo.vr = originalTagInfo.vr;
-        } catch (error) {
-          console.error(`Failed to parse value representation for tag '${tagInfo.keyword}'`);
-        }
-      }
-
       rows.push([
         `${tagInfo.tagIndent}${tagInfo.tag}`,
         tagInfo.vr,
