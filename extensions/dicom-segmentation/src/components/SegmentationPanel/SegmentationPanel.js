@@ -403,7 +403,13 @@ const SegmentationPanel = ({
 
     let segmentsHidden = [];
     possibleLabelMaps3D.forEach(labelmap3D => {
-      labelmap3D.segmentsHidden[segmentNumber] = !isVisible;
+      if (isCornerstone()) {
+        labelmap3D.segmentsHidden[segmentNumber] = !isVisible;
+      }
+
+      if (isVTK()) {
+        onSegmentVisibilityChange(segmentNumber, isVisible);
+      }
 
       segmentsHidden = [
         ...new Set([...segmentsHidden, ...labelmap3D.segmentsHidden]),
@@ -414,10 +420,6 @@ const SegmentationPanel = ({
 
     refreshSegmentations();
     refreshViewports();
-
-    if (isVTK()) {
-      onSegmentVisibilityChange(segmentNumber, isVisible);
-    }
   };
 
   const getSegmentList = () => {
@@ -563,10 +565,6 @@ const SegmentationPanel = ({
   const onVisibilityChangeHandler = isVisible => {
     let segmentsHidden = [];
     state.segmentNumbers.forEach(segmentNumber => {
-      if (isVTK()) {
-        onSegmentVisibilityChange(segmentNumber, isVisible);
-      }
-
       /** Get all labelmaps with this segmentNumber (overlapping segments) */
       const { labelmaps3D } = getBrushStackState();
       const possibleLabelMaps3D = labelmaps3D.filter(({ labelmaps2D }) => {
@@ -576,7 +574,14 @@ const SegmentationPanel = ({
       });
 
       possibleLabelMaps3D.forEach(labelmap3D => {
-        labelmap3D.segmentsHidden[segmentNumber] = !isVisible;
+        if (isCornerstone()) {
+          labelmap3D.segmentsHidden[segmentNumber] = !isVisible;
+        }
+
+        if (isVTK()) {
+          onSegmentVisibilityChange(segmentNumber, isVisible);
+        }
+
         segmentsHidden = [
           ...new Set([...segmentsHidden, ...labelmap3D.segmentsHidden]),
         ];
