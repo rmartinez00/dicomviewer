@@ -9,21 +9,16 @@
 
 .dcmrt-panel .dcmrt-panel-header {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   color: white;
-}
-
-.dcmrt-panel .dcmrt-panel-header h3 {
-  margin-top: 0;
 }
 
 .dcmrt-panel .dcmrt-panel-header .cog-icon {
   align-self: flex-end;
   color: var(--default-color);
   cursor: pointer;
-  min-height: 23px;
-  max-height: 23px;
+  margin-bottom: 20px;
 }
 
 .dcmrt-panel .dcmrt-panel-header .cog-icon:hover {
