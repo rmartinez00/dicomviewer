@@ -22,54 +22,51 @@ describe('OHIF Study List', function() {
       //Wait result list to be displayed
       cy.waitStudyList();
       cy.get('@searchResult').should($list => {
-        expect($list.length).to.be.eq(1);
+        expect($list.length).to.be.eq(3);
         expect($list).to.contain('Juno');
       });
     });
 
     it('searches MRN with exact string', function() {
-      cy.get('@MRN').type('0000003');
+      cy.get('@MRN').type('ProstateX-0000');
       //Wait result list to be displayed
       cy.waitStudyList();
       cy.get('@searchResult').should($list => {
-        expect($list.length).to.be.eq(1);
-        expect($list).to.contain('0000003');
+        expect($list.length).to.be.eq(2);
+        expect($list).to.contain('ProstateX-0000');
       });
     });
 
     it('searches Accession with exact string', function() {
-      cy.get('@AccessionNumber').type('0000155811');
+      cy.get('@AccessionNumber').type('0000481914');
       //Wait result list to be displayed
       cy.waitStudyList();
       cy.get('@searchResult').should($list => {
         expect($list.length).to.be.eq(1);
-        expect($list).to.contain('0000155811');
+        expect($list).to.contain('0000481914');
       });
     });
 
     it('searches Modality with camel case', function() {
-      cy.get('@modalities').type('Ct');
+      cy.get('@modalities').type('Mr');
       //Wait result list to be displayed
       cy.waitStudyList();
       cy.get('@searchResult').should($list => {
-        expect($list.length).to.be.greaterThan(1);
-        expect($list).to.contain('CT');
+        // TODO: Why are we facing some inconsistency with this result? ¯\_(ツ)_/¯
+        expect($list.length).to.be.eq(9);
+        expect($list).to.contain('MR');
       });
     });
-
-    /*
-    TODO: Currently broken in dicomweb-server
 
     it('searches Description with exact string', function() {
-      cy.get('@StudyDescription').type('PETCT');
+      cy.get('@StudyDescription').type('CHEST');
       //Wait result list to be displayed
       cy.waitStudyList();
       cy.get('@searchResult').should($list => {
-        expect($list.length).to.be.eq(1);
-        expect($list).to.contain('PETCT');
+        expect($list.length).to.be.eq(2);
+        expect($list).to.contain('CHEST');
       });
     });
-     */
 
     it('changes Rows per page and checks the study count', function() {
       //Show Rows per page options
@@ -131,59 +128,51 @@ describe('OHIF Study List', function() {
       //Wait result list to be displayed
       cy.waitStudyList();
       cy.get('@searchResult').should($list => {
-        expect($list.length).to.be.eq(1);
+        expect($list.length).to.be.eq(3);
         expect($list).to.contain('Juno');
       });
     });
 
     it('searches MRN with with exact string', function() {
-      cy.get('@patientNameOrMRN').type('Juno');
+      cy.get('@patientNameOrMRN').type('ProstateX-0000');
       //Wait result list to be displayed
       cy.waitStudyList();
       cy.get('@searchResult').should($list => {
-        expect($list.length).to.be.eq(1);
-        expect($list).to.contain('Juno');
+        expect($list.length).to.be.eq(6);
+        expect($list).to.contain('ProstateX-0000');
       });
     });
 
     it('searches Modality with exact string', function() {
-      cy.get('@accessionModalityDescription').type('CT');
+      cy.get('@accessionModalityDescription').type('MR');
       //Wait result list to be displayed
       cy.waitStudyList();
       cy.get('@searchResult').should($list => {
-        expect($list.length).to.be.eq(1);
-        expect($list).to.contain('CT');
+        // TODO: Why are we facing some inconsistency with this result? ¯\_(ツ)_/¯
+        expect($list.length).to.be.eq(9);
+        expect($list).to.contain('MR');
       });
     });
 
-    /*
-    /*
-    TODO: Currently broken in dicomweb-server
     it('searches Accession with exact string', function() {
-      cy.get('@accessionModalityDescription').type('0000155811');
+      cy.get('@accessionModalityDescription').type('0000481914');
       //Wait result list to be displayed
       cy.waitStudyList();
       cy.get('@searchResult').should($list => {
         expect($list.length).to.be.eq(1);
-        expect($list).to.contain('0000155811');
+        expect($list).to.contain('0000481914');
       });
     });
-     */
 
-    /*
-    TODO: Currently broken in dicomweb-server
     it('searches Description with exact string', function() {
-
-      cy.get('@accessionModalityDescription').type('PETCT');
+      cy.get('@accessionModalityDescription').type('CHEST');
       //Wait result list to be displayed
       cy.waitStudyList();
       cy.get('@searchResult').should($list => {
-        expect($list.length).to.be.eq(1);
-        expect($list).to.contain('PETCT');
+        expect($list.length).to.be.eq(2);
+        expect($list).to.contain('CHEST');
       });
     });
-
-     */
 
     it('changes Rows per page and checks the study count', function() {
       //Show Rows per page options
