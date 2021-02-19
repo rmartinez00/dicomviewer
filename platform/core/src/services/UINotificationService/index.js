@@ -8,7 +8,6 @@
  * @property {string} [position="bottomRight"] -"topLeft" | "topCenter | "topRight" | "bottomLeft" | "bottomCenter" | "bottomRight"
  * @property {string} [type="info"] - "info" | "error" | "warning" | "success"
  * @property {boolean} [autoClose=true]
- * @property {object} [action=null]
  */
 
 const name = 'UINotificationService';
@@ -35,7 +34,7 @@ const serviceImplementation = {
  * Create and show a new UI notification; returns the
  * ID of the created notification.
  *
- * @param {Notification} notification { title, message, duration, position, type, autoClose, action}
+ * @param {Notification} notification { title, message, duration, position, type, autoClose}
  * @returns {number} id
  */
 function _show({
@@ -45,7 +44,6 @@ function _show({
   position = 'bottomRight',
   type = 'info',
   autoClose = true,
-  action = null,
 }) {
   return serviceImplementation._show({
     title,
@@ -54,7 +52,6 @@ function _show({
     position,
     type,
     autoClose,
-    action,
   });
 }
 
