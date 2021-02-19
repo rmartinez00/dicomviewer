@@ -9,9 +9,7 @@ import { version } from '../package.json';
 // import loadLocales from './loadLocales';
 
 const OHIFVTKViewport = asyncComponent(() =>
-  retryImport(() =>
-    import(/* webpackChunkName: "OHIFVTKViewport" */ './OHIFVTKViewport.js')
-  )
+  retryImport(() => import(/* webpackChunkName: "OHIFVTKViewport" */ './OHIFVTKViewport.js'))
 );
 
 const vtkExtension = {
@@ -23,11 +21,7 @@ const vtkExtension = {
 
   getViewportModule({ commandsManager, servicesManager }) {
     const ExtendedVTKViewport = props => (
-      <OHIFVTKViewport
-        {...props}
-        servicesManager={servicesManager}
-        commandsManager={commandsManager}
-      />
+      <OHIFVTKViewport {...props} servicesManager={servicesManager} />
     );
     return withCommandsManager(ExtendedVTKViewport, commandsManager);
   },

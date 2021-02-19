@@ -22,7 +22,6 @@ const SnackbarProvider = ({ children, service }) => {
     autoClose: true,
     position: 'bottomRight',
     type: SnackbarTypes.INFO,
-    action: null,
   };
 
   const [count, setCount] = useState(1);
