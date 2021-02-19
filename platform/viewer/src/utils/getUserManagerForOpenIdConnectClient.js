@@ -25,6 +25,7 @@ export default function(store, oidcSettings) {
     automaticSilentRenew: true,
     revokeAccessTokenOnSignout: true,
     filterProtocolClaims: true,
+    loadUserInfo: true,
   };
 
   const userManager = createUserManager(settings);
