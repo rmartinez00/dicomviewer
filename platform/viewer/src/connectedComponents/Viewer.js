@@ -83,8 +83,6 @@ class Viewer extends Component {
         disassociate: this.disassociateStudy,
       },
     });
-
-    this._getActiveViewport = this._getActiveViewport.bind(this);
   }
 
   state = {
@@ -216,10 +214,6 @@ class Viewer extends Component {
     }
   }
 
-  _getActiveViewport() {
-    return this.props.viewports[this.props.activeViewportIndex];
-  }
-
   render() {
     let VisiblePanelLeft, VisiblePanelRight;
     const panelExtensions = extensionManager.modules[MODULE_TYPES.PANEL];
@@ -293,11 +287,11 @@ class Viewer extends Component {
                   activeIndex={this.props.activeViewportIndex}
                 />
               ) : (
-                  <ConnectedStudyBrowser
-                    studies={this.state.thumbnails}
-                    studyMetadata={this.props.studies}
-                  />
-                )}
+                <ConnectedStudyBrowser
+                  studies={this.state.thumbnails}
+                  studyMetadata={this.props.studies}
+                />
+              )}
             </SidePanel>
           </ErrorBoundaryDialog>
 
@@ -320,8 +314,6 @@ class Viewer extends Component {
                   viewports={this.props.viewports}
                   studies={this.props.studies}
                   activeIndex={this.props.activeViewportIndex}
-                  activeViewport={this.props.viewports[this.props.activeViewportIndex]}
-                  getActiveViewport={this._getActiveViewport}
                 />
               )}
             </SidePanel>
@@ -344,7 +336,7 @@ export default withDialog(Viewer);
  * @param {Study[]} studies
  * @param {DisplaySet[]} studies[].displaySets
  */
-const _mapStudiesToThumbnails = function (studies) {
+const _mapStudiesToThumbnails = function(studies) {
   return studies.map(study => {
     const { StudyInstanceUID } = study;
 
