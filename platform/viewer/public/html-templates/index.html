@@ -6,73 +6,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="theme-color" content="#000000" />
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="OHIF Viewer">
+  <meta name="application-name" content="Dicom Server Viewer">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="@ohif/viewer">
   <meta name="msapplication-TileColor" content="#fff">
-  <meta name="msapplication-TileImage" content="<%= PUBLIC_URL %>assets/mstile-144x144.png">
-  <meta name="msapplication-config" content="<%= PUBLIC_URL %>assets/browserconfig.xml">
-  <link rel="manifest" href="<%= PUBLIC_URL %>manifest.json">
-
-  <link rel="shortcut icon" href="<%= PUBLIC_URL %>assets/favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="<%= PUBLIC_URL %>assets/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="<%= PUBLIC_URL %>assets/favicon-32x32.png">
-  <link rel="apple-touch-icon" sizes="57x57" href="<%= PUBLIC_URL %>assets/apple-touch-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="<%= PUBLIC_URL %>assets/apple-touch-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="<%= PUBLIC_URL %>assets/apple-touch-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="<%= PUBLIC_URL %>assets/apple-touch-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="<%= PUBLIC_URL %>assets/apple-touch-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="<%= PUBLIC_URL %>assets/apple-touch-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="<%= PUBLIC_URL %>assets/apple-touch-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="<%= PUBLIC_URL %>assets/apple-touch-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="167x167" href="<%= PUBLIC_URL %>assets/apple-touch-icon-167x167.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="<%= PUBLIC_URL %>assets/apple-touch-icon-180x180.png">
-  <link rel="apple-touch-icon" sizes="1024x1024" href="<%= PUBLIC_URL %>assets/apple-touch-icon-1024x1024.png">
-  <link rel="apple-touch-startup-image"
-    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)"
-    href="<%= PUBLIC_URL %>assets/apple-touch-startup-image-320x460.png">
-  <link rel="apple-touch-startup-image"
-    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"
-    href="<%= PUBLIC_URL %>assets/apple-touch-startup-image-640x920.png">
-  <link rel="apple-touch-startup-image"
-    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
-    href="<%= PUBLIC_URL %>assets/apple-touch-startup-image-640x1096.png">
-  <link rel="apple-touch-startup-image"
-    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
-    href="<%= PUBLIC_URL %>assets/apple-touch-startup-image-750x1294.png">
-  <link rel="apple-touch-startup-image"
-    media="(device-width: 414px) and (device-height: 736px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 3)"
-    href="<%= PUBLIC_URL %>assets/apple-touch-startup-image-1182x2208.png">
-  <link rel="apple-touch-startup-image"
-    media="(device-width: 414px) and (device-height: 736px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3)"
-    href="<%= PUBLIC_URL %>assets/apple-touch-startup-image-1242x2148.png">
-  <link rel="apple-touch-startup-image"
-    media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 1)"
-    href="<%= PUBLIC_URL %>assets/apple-touch-startup-image-748x1024.png">
-  <link rel="apple-touch-startup-image"
-    media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 1)"
-    href="<%= PUBLIC_URL %>assets/apple-touch-startup-image-768x1004.png">
-  <link rel="apple-touch-startup-image"
-    media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)"
-    href="<%= PUBLIC_URL %>assets/apple-touch-startup-image-1496x2048.png">
-  <link rel="apple-touch-startup-image"
-    media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)"
-    href="<%= PUBLIC_URL %>assets/apple-touch-startup-image-1536x2008.png">
-  <link rel="icon" type="image/png" sizes="228x228" href="<%= PUBLIC_URL %>assets/coast-228x228.png">
-  <link rel="yandex-tableau-widget" href="<%= PUBLIC_URL %>assets/yandex-browser-manifest.json">
+  <meta name="msapplication-TileImage" content="/assets/mstile-144x144.png">
+  <meta name="msapplication-config" content="/assets/browserconfig.xml">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="manifest" href="/assets/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="{{ asset('css/base.css') }}" />
 
   <!-- Built with: https://polyfill.io/v3/url-builder/ -->
+  <script src="/js/jquery.min.js"></script>
   <!-- Targets IE11 -->
+  <script>
+    window.userToken = "{{ userToken }}";
+  </script>
   <script
     src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default%2CObject.values%2CArray.prototype.flat%2CObject.entries%2CSymbol%2CArray.prototype.includes%2CString.prototype.repeat%2CArray.prototype.find"></script>
   <script type="text/javascript">
     window.PUBLIC_URL = '<%= PUBLIC_URL %>';
   </script>
-  <script type="text/javascript" src="<%= PUBLIC_URL %>app-config.js"></script>
-  <script type="module" src="<%= PUBLIC_URL %>init-service-worker.js"></script>
+  <script type="text/javascript" src="/app-config.js"></script>
 
-  <title>OHIF Viewer</title>
+
+  <script type="module" src="/init-service-worker.js"></script>
+
+  <title>Dicom Server</title>
 
   <!-- WEB FONTS -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700&display=swap" rel="stylesheet" />
@@ -91,12 +68,169 @@
         };
       };
     </script> -->
-</head>
-
 <body>
-  <noscript> You need to enable JavaScript to run this app. </noscript>
-
-  <div id="root"></div>
+<noscript> You need to enable JavaScript to run this app. </noscript>
+<div class="filters">
+  <span class="disclaimer white">Filtros Rapidos</span>
+  <select id="filter" name="select">
+    <option value="" selected>Selecciona Filtro</option>
+    <option value="1">Cabeza y Cuello: Cerebro (Tecla Rapida 1)</option>
+    <option value="2">Cabeza y Cuello: Subdural (Tecla Rapida 2)</option>
+    <option value="3">Cabeza y Cuello: Accidente Cerebrovascular (Tecla Rapida 3)</option>
+    <option value="4">Cabeza y Cuello: Hueso (Tecla Rapida 4)</option>
+    <option value="5">Cabeza y Cuello: Tejidos Blandos (Tecla Rapida 5)</option>
+    <option value="6">Pecho: Pulmones (Tecla Rapida 6)</option>
+    <option value="7">Pecho: Mediastinio (Tecla Rapida 7)</option>
+    <option value="8">Abdomen: Higado (Tecla Rapida 8)</option>
+    <option value="9">Abdomen: Tejidos Blandos (Tecla Rapida 9)</option>
+    <option value="10">Columna: Tejidos Blandos (Tecla Rapida 0)</option>
+    <option value="11">Columna: Hueso (Tecla Rapida q)</option>
+  </select>
+</div>
+<div id="loader" class="center"></div>
+<div id="root"></div>
 </body>
 
 </html>
+
+{% block javascripts %}
+<script>
+  $( document ).ready(function() {
+
+    setTimeout(function(){
+
+      {% if not patient %}
+      $(".ToolbarRow").prepend("<div id='home_button' class='toolbar-button'><a><img style='height:25px;filter: contrast(0.4);'src='/assets/favicon-32x32.png'></img></a><br>Estudios</div>");
+      {% if diagnosed %}
+
+      {% else %}
+      $(".ToolbarRow")
+        .append("<div class='toolbar-button'><div id='diagnostico' class='fa fa-address-book' style='font-size:20pt;'></div><br>Reporte</div>");
+      {% endif %}
+      {% endif %}
+
+      $(".header-studyListLinkSection").attr('href', "#")
+      {% if diagnosed %}
+      $(".ToolbarRow")
+        .append("<div class='toolbar-button'><div id='pdf' class='fa fa-file-pdf-o' style='font-size:20pt;'></div><br>PDF</div>");
+      {% endif %}
+
+
+      $("#diagnostico").click(function(){
+        {% if view and not patient %}
+        var url = '/diagnostic/new?sid={{ study_id}}';
+        window.open(url, '_blank');
+        {% endif %}
+
+      });
+
+      $("#home_button").click(function(){
+        document.location.href="/";
+      });
+
+      {% if pdfUrl is not empty %}
+      $("#pdf").click(function(){
+
+        var url = '{{ pdfUrl }}'
+        window.open(url, '_blank');
+
+      });
+      {% endif %}
+
+      $(".table-body").click(function(){
+        setTimeout(function(){
+          location.reload();
+        }, 200);
+      });
+
+      $(".header-studyListLinkSection").click(function(){
+        setTimeout(function(){
+          location.reload();
+        }, 200);
+      });
+    }, 1000);
+
+  });
+
+  $("#filter").change(function(){
+    ohif.app.commandsManager.runCommand("windowLevelPreset"+$("#filter").val(), {evt: KeyboardEvent}, null);
+  });
+
+  {% if patient == true %}
+  $( document ).ready(function() {
+    setTimeout(function(){
+      $(".ToolbarRow[data-cy*='length']").hide();
+      $(".toolbar-button[data-cy*='angle']").hide();
+      $(".toolbar-button[data-cy*='annotate']").hide();
+      $(".btn-group").hide();
+      $(".toolbar-button[data-cy*='more']").hide();
+      $(".toolbar-button[data-cy*='reset']").hide();
+      $(".toolbar-button[data-cy*='layout']").hide();
+      $(".pull-right").hide();
+    }, 100);
+    $(".viewer-main-menu").hide();
+
+    $(document).on('mousemove keypress click',function(e) {
+      $(".ToolbarRow[data-cy*='length']").hide();
+      $(".toolbar-button[data-cy*='angle']").hide();
+      $(".toolbar-button[data-cy*='annotate']").hide();
+      $(".btn-group").hide();
+      $(".toolbar-button[data-cy*='more']").hide();
+      $(".toolbar-button[data-cy*='reset']").hide();
+      $(".toolbar-button[data-cy*='layout']").hide();
+      $(".pull-right").hide();
+
+    });
+
+  });
+  {% endif %}
+
+  $(document).on('keypress',function(e) {
+    //alert(e.which);
+    if(e.which == 49) {
+      $("#filter").val(1).change()
+    }
+    if(e.which == 50) {
+      $("#filter").val(2).change()
+    }
+    if(e.which == 51) {
+      $("#filter").val(3).change()
+    }
+    if(e.which == 52) {
+      $("#filter").val(4).change()
+    }
+    if(e.which == 53) {
+      $("#filter").val(5).change()
+    }
+    if(e.which == 54) {
+      $("#filter").val(6).change()
+    }
+    if(e.which == 55) {
+      $("#filter").val(7).change()
+    }
+    if(e.which == 56) {
+      $("#filter").val(8).change()
+    }
+    if(e.which == 57) {
+      $("#filter").val(9).change()
+    }
+    if(e.which == 48) {
+      $("#filter").val(10).change()
+    }
+    if(e.which == 113) {
+      $("#filter").val(11).change()
+    }
+  });
+
+  document.onreadystatechange = function() {
+    if (document.readyState !== "complete") {
+      document.querySelector("body").style.visibility = "hidden";
+      document.querySelector("#loader").style.visibility = "visible";
+    } else {
+      document.querySelector("#loader").style.display = "none";
+      document.querySelector("body").style.visibility = "visible";
+    }
+  };
+
+</script>
+{% endblock %}

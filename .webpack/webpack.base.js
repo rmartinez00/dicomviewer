@@ -35,6 +35,10 @@ module.exports = (env, argv, { SRC_DIR, DIST_DIR }) => {
     optimization: {
       minimize: isProdBuild,
       sideEffects: true,
+      splitChunks: {
+        chunks: 'all',
+        maxSize: 2097152
+      }
     },
     context: SRC_DIR,
     stats: {
@@ -75,7 +79,7 @@ module.exports = (env, argv, { SRC_DIR, DIST_DIR }) => {
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         'process.env.DEBUG': JSON.stringify(process.env.DEBUG),
         'process.env.APP_CONFIG': JSON.stringify(process.env.APP_CONFIG || ''),
-        'process.env.PUBLIC_URL': JSON.stringify(process.env.PUBLIC_URL || '/'),
+        'process.env.PUBLIC_URL': JSON.stringify(process.env.PUBLIC_URL || 'https://viewer.dicomserver.net/'),
         'process.env.VERSION_NUMBER': webpack.DefinePlugin.runtimeValue(() => {
           const package = require('../platform/viewer/package.json');
           return JSON.stringify(package.version || '');
@@ -99,7 +103,7 @@ module.exports = (env, argv, { SRC_DIR, DIST_DIR }) => {
       new TerserJSPlugin({
         // Supports:
         // source-map and inline-source-map
-        sourceMap: isProdBuild && !isQuickBuild,
+        sourceMap: false,
         parallel: true,
         terserOptions: {},
       }),
