@@ -3,12 +3,12 @@ describe('OHIF Study Viewer Page', function() {
     cy.checkStudyRouteInViewer(
       '1.2.840.113619.2.5.1762583153.215519.978957063.78'
     );
-    cy.expectMinimumThumbnails(3);
+    cy.expectMinimumThumbnails(5);
   });
 
   beforeEach(function() {
     cy.initCommonElementsAliases();
-    cy.resetViewport().wait(50);
+    cy.resetViewport();
   });
 
   it('checks if series thumbnails are being displayed', function() {
@@ -50,10 +50,10 @@ describe('OHIF Study Viewer Page', function() {
       .click();
 
     // Click "Relabel"
-    cy.get('.btnAction', { timeout: 10000 })
+    cy.get('.btnAction')
       .first()
       .contains('Relabel')
-      .click().should('be.visible');
+      .click();
 
     // Search for "Bone"
     cy.get('.searchInput').type('Bone');
@@ -68,20 +68,11 @@ describe('OHIF Study Viewer Page', function() {
 
     // Verify if 'Bone' label was added
     cy.get('.measurementLocation').should('contain.text', 'Bone');
-
-    // Remove the measurement we just added
-    cy.get('.btnAction')
-      .last()
-      .contains('Delete')
-      .click()
-
     // Close panel
     cy.get('@measurementsBtn').click();
     cy.get('@measurementsPanel').should('not.be.enabled');
   });
 
-  /*
-  TODO: Not sure why this is failing
   it('checks if Description can be added to measurement item under Measurements panel', () => {
     cy.addLengthMeasurement(); //Adding measurement in the viewport
     cy.get('@measurementsBtn').click();
@@ -103,19 +94,7 @@ describe('OHIF Study Viewer Page', function() {
 
     //Verify if descriptionText was added
     cy.get('.measurementLocation').should('contain.text', descriptionText);
-
-    // Remove the measurement we just added
-    cy.get('.btnAction')
-      .last()
-      .contains('Delete')
-      .click()
-
-    // Close panel
-    cy.get('@measurementsBtn').click();
-    cy.get('@measurementsPanel').should('not.be.enabled');
   });
-   */
-
 
   it('checks if measurement item can be deleted through the context menu on the viewport', function() {
     cy.addLengthMeasurement([100, 100], [200, 100]); //Adding measurement in the viewport
@@ -129,7 +108,6 @@ describe('OHIF Study Viewer Page', function() {
       .trigger('mouseup', x1, y1, {
         which: 3,
       })
-      .wait(300)
       .then(() => {
         //Contextmenu is visible
         cy.get('.ToolContextMenu').should('be.visible');
@@ -144,9 +122,12 @@ describe('OHIF Study Viewer Page', function() {
     cy.get('@measurementsBtn').click();
 
     //Verify measurements was removed from panel
-    cy.get('.measurementItem')
-      .should('not.exist')
-      .log('Annotation successfully removed');
+    cy.get('.measurementItem');
+
+    // TODO: We need a seperate test server for this to work.
+    // As anyone can save measurements on a different slice.
+    // .should('not.exist')
+    // .log('Annotation removed with success');
 
     //Close panel
     cy.get('@measurementsBtn').click();
@@ -247,7 +228,7 @@ describe('OHIF Study Viewer Page', function() {
     });
 
     const expectedText =
-      'Ser: 2Img: 13 13/13512 x 512Loc: 18.40 mm Thick: 3.00 mm'; //'Img: 13 13/13';
+      'Ser: 5Img: 1 12/12512 x 512Loc: -15.40 mm Thick: 4.00 mm'; //'Img: 13 13/13';
     cy.get('@viewportInfoBottomLeft').should('contains.text', expectedText);
   });
 
@@ -265,8 +246,7 @@ describe('OHIF Study Viewer Page', function() {
       .trigger('mousemove', 'center', { which: 3 })
       .trigger('mouseup');
 
-
-    const expectedText = 'Zoom: 442%';
+    const expectedText = 'Zoom: 301%';
     cy.get('@viewportInfoBottomRight').should('contains.text', expectedText);
   });
 
@@ -321,6 +301,6 @@ describe('OHIF Study Viewer Page', function() {
 
     //close modal
     cy.get('[data-cy="close-button"]').click();
-    cy.get('@aboutOverlay').should('not.exist');
+    cy.get('@aboutOverlay').should('not.be.enabled');
   });
 });

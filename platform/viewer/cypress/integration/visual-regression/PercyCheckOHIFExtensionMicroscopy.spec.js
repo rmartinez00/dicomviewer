@@ -1,6 +1,3 @@
-/*
-Temporarily disabling as we transition to containerized PACS for E2E tests
-
 describe('Visual Regression - OHIF Microscopy Extension', () => {
   before(() => {
     cy.openStudyModality('SM');
@@ -23,4 +20,3 @@ describe('Visual Regression - OHIF Microscopy Extension', () => {
     );
   });
 });
-*/

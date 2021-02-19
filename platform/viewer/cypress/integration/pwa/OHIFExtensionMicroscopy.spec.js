@@ -1,6 +1,3 @@
-/*
-Temporarily disabling as we transition to containerized PACS for E2E tests
-
 describe('OHIF Microscopy Extension', () => {
   before(() => {
     cy.openStudyModality('SM');
@@ -30,4 +27,3 @@ describe('OHIF Microscopy Extension', () => {
     cy.screenshot('Microscopy Extension - Should display loaded canvas');
   });
 });
-*/

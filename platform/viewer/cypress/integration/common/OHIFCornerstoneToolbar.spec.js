@@ -3,18 +3,12 @@ describe('OHIF Cornerstone Toolbar', () => {
     cy.checkStudyRouteInViewer(
       '1.2.840.113619.2.5.1762583153.215519.978957063.78'
     );
-    cy.expectMinimumThumbnails(3);
+    cy.expectMinimumThumbnails(5);
   });
 
   beforeEach(() => {
     cy.initCornerstoneToolsAliases();
     cy.initCommonElementsAliases();
-
-    cy.get('[data-cy="thumbnail-list"]:nth-child(1)').click();
-
-    const expectedText = 'Ser: 1';
-    cy.get('@viewportInfoBottomLeft').should('contains.text', expectedText);
-
     cy.resetViewport();
   });
 
@@ -55,7 +49,7 @@ describe('OHIF Cornerstone Toolbar', () => {
   });
 
   it('checks if Stack Scroll tool will navigate across all series in the viewport', () => {
-    //Click on button and verify if icon is active on toolbar
+    //Click on button and vefiry if icon is active on toolbar
     cy.get('@stackScrollBtn')
       .click()
       .then($stackScrollBtn => {
@@ -91,7 +85,7 @@ describe('OHIF Cornerstone Toolbar', () => {
   });
 
   it('checks if Levels tool will change the contrast and brightness of an image in the viewport', () => {
-    //Click on button and verify if icon is active on toolbar
+    //Click on button and vefiry if icon is active on toolbar
     cy.get('@levelsBtn')
       .click()
       .then($levelsBtn => {
@@ -112,7 +106,7 @@ describe('OHIF Cornerstone Toolbar', () => {
   });
 
   it('checks if Pan tool will move the image inside the viewport', () => {
-    //Click on button and verify if icon is active on toolbar
+    //Click on button and vefiry if icon is active on toolbar
     cy.get('@panBtn')
       .click()
       .then($panBtn => {
@@ -126,7 +120,7 @@ describe('OHIF Cornerstone Toolbar', () => {
   });
 
   it('checks if Length annotation can be added on viewport and on measurements panel', () => {
-    //Click on button and verify if icon is active on toolbar
+    //Click on button and vefiry if icon is active on toolbar
     cy.get('@lengthBtn')
       .click()
       .then($lengthbtn => {
@@ -153,7 +147,7 @@ describe('OHIF Cornerstone Toolbar', () => {
   });
 
   it('checks if Angle annotation can be added on viewport and on measurements panel', () => {
-    //Click on button and verify if icon is active on toolbar
+    //Click on button and vefiry if icon is active on toolbar
     cy.get('@angleBtn')
       .click()
       .then($angleBtn => {
@@ -198,8 +192,7 @@ describe('OHIF Cornerstone Toolbar', () => {
 
     //Click on button
     cy.get('@cineBtn').click();
-
-    // Verify if cine control overlay is being displayed
+    //Vefiry if cine control overlay is being displayed
     cy.get('.cine-controls')
       .as('cineControls')
       .should('be.visible');
@@ -260,15 +253,13 @@ describe('OHIF Cornerstone Toolbar', () => {
     cy.get('@cineBtn')
       .click()
       .then(() => {
-        // Verify that cine control overlay is hidden
-        cy.get('@cineControls').should('not.exist');
+        //Vefiry if cine control overlay is hidden
+        cy.get('@cineControls').should('not.be.visible');
       });
   });
 
   it('checks if More button will prompt a modal with secondary tools', () => {
-    //Click on More button
     cy.get('@moreBtn').click();
-
     //Verify if overlay is displayed
     cy.get('.tooltip-toolbar-overlay')
       .as('toolbarOverlay')
@@ -297,9 +288,8 @@ describe('OHIF Cornerstone Toolbar', () => {
       });
 
     //Verify if overlay is hidden
-    cy.get('@toolbarOverlay').should('not.exist');
+    cy.get('@toolbarOverlay').should('not.be.visible');
   });
-
 
   it('checks if Layout tool will multiply the number of viewports displayed', () => {
     //Click on Layout button and verify if overlay is displayed
@@ -425,7 +415,7 @@ describe('OHIF Cornerstone Toolbar', () => {
     // TODO: We need a seperate test server for this to work.
     // As anyone can save measurements on a different slice.
 
-    //cy.get('.measurementItem'); //.should('not.exist');
+    cy.get('.measurementItem'); //.should('not.exist');
 
     //Close More button overlay
     cy.get('@moreBtn').click();
@@ -449,9 +439,6 @@ describe('OHIF Cornerstone Toolbar', () => {
         cy.get('@viewportInfoMidLeft').should('contains.text', 'F');
         cy.get('@viewportInfoMidTop').should('contains.text', 'R');
       });
-
-    //Click on More button to close it
-    cy.get('@moreBtn').click();
   });
 
   it('check if Flip H tool will flip the image horizontally in the viewport', () => {
@@ -464,10 +451,6 @@ describe('OHIF Cornerstone Toolbar', () => {
     cy.get('[data-cy="flip h"]').click();
     cy.get('@viewportInfoMidLeft').should('contains.text', 'L');
     cy.get('@viewportInfoMidTop').should('contains.text', 'H');
-
-    //Click on More button to close it
-    cy.get('@moreBtn').click();
-    cy.get('.tooltip-toolbar-overlay').should('not.exist');
   });
 
   it('check if Flip V tool will flip the image vertically in the viewport', () => {
@@ -480,9 +463,5 @@ describe('OHIF Cornerstone Toolbar', () => {
     cy.get('[data-cy="flip v"]').click();
     cy.get('@viewportInfoMidLeft').should('contains.text', 'R');
     cy.get('@viewportInfoMidTop').should('contains.text', 'F');
-
-    //Click on More button to close it
-    cy.get('@moreBtn').click();
-    cy.get('.tooltip-toolbar-overlay').should('not.exist');
   });
 });
