@@ -5,11 +5,10 @@ import usePrevious from '../customHooks/usePrevious';
 import ConnectedViewer from './ConnectedViewer.js';
 import PropTypes from 'prop-types';
 import { extensionManager } from './../App.js';
-import { useSnackbarContext, ErrorPage } from '@ohif/ui';
+import { useSnackbarContext } from '@ohif/ui';
 
 // Contexts
 import AppContext from '../context/AppContext';
-import NotFound from '../routes/NotFound';
 
 const { OHIFStudyMetadata, OHIFSeriesMetadata } = metadata;
 const { retrieveStudiesMetadata, deleteStudyMetadataPromise } = studies;
@@ -292,7 +291,7 @@ function ViewerRetrieveStudyData({
           })
           .catch(error => {
             if (error && !error.isCanceled) {
-              setError(error);
+              setError(true);
               log.error(error);
             }
           });
@@ -359,13 +358,13 @@ function ViewerRetrieveStudyData({
         })
         .catch(error => {
           if (error && !error.isCanceled) {
-            setError(error);
+            setError(true);
             log.error(error);
           }
         });
     } catch (error) {
       if (error) {
-        setError(error);
+        setError(true);
         log.error(error);
       }
     }
@@ -412,12 +411,7 @@ function ViewerRetrieveStudyData({
   }, []);
 
   if (error) {
-    const content = JSON.stringify(error);
-    if (content.includes('404') || content.includes('NOT_FOUND')) {
-      return <NotFound />;
-    }
-
-    return <NotFound message="Failed to retrieve study data" />;
+    return <div>Error: {JSON.stringify(error)}</div>;
   }
 
   return (
