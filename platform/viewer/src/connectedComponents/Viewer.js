@@ -241,9 +241,6 @@ class Viewer extends Component {
         {/* TOOLBAR */}
         <ErrorBoundaryDialog context="ToolbarRow">
           <ToolbarRow
-            activeViewport={
-              this.props.viewports[this.props.activeViewportIndex]
-            }
             isLeftSidePanelOpen={this.state.isLeftSidePanelOpen}
             isRightSidePanelOpen={this.state.isRightSidePanelOpen}
             selectedLeftSidePanel={
@@ -296,11 +293,11 @@ class Viewer extends Component {
                   activeIndex={this.props.activeViewportIndex}
                 />
               ) : (
-                <ConnectedStudyBrowser
-                  studies={this.state.thumbnails}
-                  studyMetadata={this.props.studies}
-                />
-              )}
+                  <ConnectedStudyBrowser
+                    studies={this.state.thumbnails}
+                    studyMetadata={this.props.studies}
+                  />
+                )}
             </SidePanel>
           </ErrorBoundaryDialog>
 
@@ -323,9 +320,7 @@ class Viewer extends Component {
                   viewports={this.props.viewports}
                   studies={this.props.studies}
                   activeIndex={this.props.activeViewportIndex}
-                  activeViewport={
-                    this.props.viewports[this.props.activeViewportIndex]
-                  }
+                  activeViewport={this.props.viewports[this.props.activeViewportIndex]}
                   getActiveViewport={this._getActiveViewport}
                 />
               )}
@@ -349,7 +344,7 @@ export default withDialog(Viewer);
  * @param {Study[]} studies
  * @param {DisplaySet[]} studies[].displaySets
  */
-const _mapStudiesToThumbnails = function(studies) {
+const _mapStudiesToThumbnails = function (studies) {
   return studies.map(study => {
     const { StudyInstanceUID } = study;
 
