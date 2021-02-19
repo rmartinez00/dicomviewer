@@ -5,10 +5,6 @@ const SnackbarItem = ({ options, onClose }) => {
     onClose(options.id);
   };
 
-  const handleClick = () => {
-    options.action.onClick({ ...options, close: handleClose });
-  };
-
   useEffect(() => {
     if (options.autoClose) {
       setTimeout(() => {
@@ -29,7 +25,7 @@ const SnackbarItem = ({ options, onClose }) => {
       {options.title && <div className="sb-title">{options.title}</div>}
       {options.message && <div className="sb-message">{options.message}</div>}
       {options.action && (
-        <button className="sb-action" onClick={handleClick}>
+        <button className="sb-action" onClick={options.action.onClick}>
           {options.action.label}
         </button>
       )}
