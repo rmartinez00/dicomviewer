@@ -159,12 +159,12 @@ const SegmentationPanel = ({
         const labelmapList = getLabelmapList(
           brushStackState,
           firstImageId,
-          activeViewport,
+          activeViewport
         );
         const segmentList = getSegmentList(
           labelmap3D,
           firstImageId,
-          brushStackState,
+          brushStackState
         );
         setState(state => ({
           ...state,
@@ -292,13 +292,10 @@ const SegmentationPanel = ({
 
         const sameSegment = state.selectedSegment === segmentNumber;
         const setCurrentSelectedSegment = () => {
-          const activeViewport = viewports[activeIndex];
-
           _setActiveSegment(
             firstImageId,
             segmentNumber,
-            labelmap3D.activeSegmentIndex,
-            activeViewport
+            labelmap3D.activeSegmentIndex
           );
           updateState('selectedSegment', sameSegment ? null : segmentNumber);
 
@@ -643,7 +640,7 @@ const _getReferencedSegDisplaysets = (StudyInstanceUID, SeriesInstanceUID) => {
  * @param {*} activeSegmentIndex
  * @returns
  */
-const _setActiveSegment = (firstImageId, segmentIndex, activeSegmentIndex, activeViewport) => {
+const _setActiveSegment = (firstImageId, segmentIndex, activeSegmentIndex) => {
   if (segmentIndex === activeSegmentIndex) {
     log.info(`${activeSegmentIndex} is already the active segment`);
     return;
@@ -656,27 +653,8 @@ const _setActiveSegment = (firstImageId, segmentIndex, activeSegmentIndex, activ
     brushStackState.labelmaps3D[brushStackState.activeLabelmapIndex];
   labelmap3D.activeSegmentIndex = segmentIndex;
 
-  /**
-   * Activates the correct label map if clicked segment
-   * does not belong to the active labelmap
-   */
-  const { StudyInstanceUID } = activeViewport;
-  const studyMetadata = studyMetadataManager.get(StudyInstanceUID);
-  const allDisplaySets = studyMetadata.getDisplaySets();
-  let newLabelmapIndex = brushStackState.activeLabelmapIndex;
-  allDisplaySets.forEach(displaySet => {
-    if (displaySet.labelmapSegments) {
-      Object.keys(displaySet.labelmapSegments).forEach(labelmapIndex => {
-        if (displaySet.labelmapSegments[labelmapIndex].includes(segmentIndex)) {
-          newLabelmapIndex = labelmapIndex;
-        }
-      });
-    }
-  });
-
-  brushStackState.activeLabelmapIndex = newLabelmapIndex;
-
   refreshViewports();
+
   return segmentIndex;
 };
 
