@@ -37,14 +37,9 @@ export default async function setActiveLabelmap(
     ? brushStackState.activeLabelmapIndex
     : undefined;
 
-  let labelmapIndex =
-    displaySet.hasOverlapping === true
-      ? displaySet.originLabelMapIndex
-      : displaySet.labelmapIndex;
-
-  if (labelmapIndex === activeLabelmapIndex) {
+  if (displaySet.labelmapIndex === activeLabelmapIndex) {
     log.warn(`${activeLabelmapIndex} is already the active labelmap`);
-    return labelmapIndex;
+    return displaySet.labelmapIndex;
   }
 
   if (!displaySet.isLoaded) {
@@ -60,18 +55,13 @@ export default async function setActiveLabelmap(
     await loadPromise;
   }
 
-  labelmapIndex =
-    displaySet.hasOverlapping === true
-      ? displaySet.originLabelMapIndex
-      : displaySet.labelmapIndex;
-
   // This might have just been created, so need to use the non-cached value.
   state = cornerstoneTools.getModule('segmentation').state;
   brushStackState = state.series[firstImageId];
-  brushStackState.activeLabelmapIndex = labelmapIndex;
+  brushStackState.activeLabelmapIndex = displaySet.labelmapIndex;
 
   refreshViewports();
   callback();
 
-  return labelmapIndex;
+  return displaySet.labelmapIndex;
 }
