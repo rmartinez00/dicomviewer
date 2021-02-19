@@ -46,6 +46,36 @@ const DialogProvider = ({ children, service }) => {
   };
 
   /**
+   * Sets the implementation of a dialog service that can be used by extensions.
+   *
+   * @returns void
+   */
+  useEffect(() => {
+    if (service) {
+      service.setServiceImplementation({ create, dismiss, dismissAll });
+    }
+  }, [create, dismiss, service]);
+
+  /**
+   * UI Dialog
+   *
+   * @typedef {Object} DialogProps
+   * @property {string} id The dialog id.
+   * @property {DialogContent} content The dialog content.
+   * @property {Object} contentProps The dialog content props.
+   * @property {boolean} isDraggable Controls if dialog content is draggable or not.
+   * @property {boolean} showOverlay Controls dialog overlay.
+   * @property {boolean} centralize Center the dialog on the screen.
+   * @property {boolean} preservePosition Use last position instead of default.
+   * @property {ElementPosition} defaultPosition Specifies the `x` and `y` that the dragged item should start at.
+   * @property {Function} onStart Called when dragging starts. If `false` is returned any handler, the action will cancel.
+   * @property {Function} onStop Called when dragging stops.
+   * @property {Function} onDrag Called while dragging.
+   */
+
+  useEffect(() => _bringToFront(lastDialogId), [_bringToFront, lastDialogId]);
+
+  /**
    * Creates a new dialog and return its id.
    *
    * @param {DialogProps} props The dialog props.
@@ -79,15 +109,20 @@ const DialogProvider = ({ children, service }) => {
   );
 
   /**
-   * Sets the implementation of a dialog service that can be used by extensions.
+   * Dismisses all dialogs.
    *
    * @returns void
    */
-  useEffect(() => {
-    if (service) {
-      service.setServiceImplementation({ create, dismiss, dismissAll });
-    }
-  }, [create, dismiss, service]);
+  const dismissAll = () => {
+    setDialogs([]);
+  };
+
+  /**
+   * Indicate if there are no dialogs present.
+   *
+   * @returns True if no dialogs are present.
+   */
+  const isEmpty = () => dialogs && dialogs.length < 1;
 
   /**
    * Moves the dialog to the foreground if clicked.
@@ -103,41 +138,6 @@ const DialogProvider = ({ children, service }) => {
         : dialogs;
     });
   }, []);
-
-  /**
-   * UI Dialog
-   *
-   * @typedef {Object} DialogProps
-   * @property {string} id The dialog id.
-   * @property {DialogContent} content The dialog content.
-   * @property {Object} contentProps The dialog content props.
-   * @property {boolean} isDraggable Controls if dialog content is draggable or not.
-   * @property {boolean} showOverlay Controls dialog overlay.
-   * @property {boolean} centralize Center the dialog on the screen.
-   * @property {boolean} preservePosition Use last position instead of default.
-   * @property {ElementPosition} defaultPosition Specifies the `x` and `y` that the dragged item should start at.
-   * @property {Function} onStart Called when dragging starts. If `false` is returned any handler, the action will cancel.
-   * @property {Function} onStop Called when dragging stops.
-   * @property {Function} onDrag Called while dragging.
-   */
-
-  useEffect(() => _bringToFront(lastDialogId), [_bringToFront, lastDialogId]);
-
-  /**
-   * Dismisses all dialogs.
-   *
-   * @returns void
-   */
-  const dismissAll = () => {
-    setDialogs([]);
-  };
-
-  /**
-   * Indicate if there are no dialogs present.
-   *
-   * @returns True if no dialogs are present.
-   */
-  const isEmpty = () => dialogs && dialogs.length < 1;
 
   const renderDialogs = () =>
     dialogs.map(dialog => {
@@ -219,12 +219,14 @@ const DialogProvider = ({ children, service }) => {
         </Draggable>
       );
 
-      return showOverlay ? (
-        <div className="Overlay" key={id}>
-          {dragableItem()}
-        </div>
-      ) : (
-        dragableItem()
+      return (
+        showOverlay ? (
+          <div className="Overlay" key={id}>
+            {dragableItem()}
+          </div>
+        ) : (
+            dragableItem()
+          )
       );
     });
 
@@ -247,7 +249,11 @@ const DialogProvider = ({ children, service }) => {
 
   return (
     <DialogContext.Provider value={{ create, dismiss, dismissAll, isEmpty }}>
-      {!isEmpty() && <div className="DraggableArea">{renderDialogs()}</div>}
+      {!isEmpty() &&
+        <div className="DraggableArea">
+          {renderDialogs()}
+        </div>
+      }
       {children}
     </DialogContext.Provider>
   );
