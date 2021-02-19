@@ -17,7 +17,6 @@ const { BlendMode } = Constants;
 const commandsModule = ({ commandsManager, UINotificationService }) => {
   // TODO: Put this somewhere else
   let apis = {};
-  let defaultVOI;
 
   async function _getActiveViewportVTKApi(viewports) {
     const {
@@ -120,11 +119,9 @@ const commandsModule = ({ commandsManager, UINotificationService }) => {
       return apis[index];
     },
     resetMPRView() {
-      // Reset orientation
-      apis.forEach(api => api.resetOrientation());
-
-      // Reset VOI
-      if (defaultVOI) setVOI(defaultVOI);
+      apis.forEach(api => {
+        api.resetOrientation();
+      });
 
       // Reset the crosshairs
       apis[0].svgWidgets.rotatableCrosshairsWidget.resetCrosshairs(apis, 0);
@@ -175,7 +172,7 @@ const commandsModule = ({ commandsManager, UINotificationService }) => {
       segmentNumber,
       frameIndex,
       frame,
-      done = () => { },
+      done = () => {},
     }) => {
       let api = apis[viewports.activeViewportIndex];
 
@@ -390,7 +387,6 @@ const commandsModule = ({ commandsManager, UINotificationService }) => {
 
       // Get current VOI if cornerstone viewport.
       const cornerstoneVOI = getVOIFromCornerstoneViewport();
-      defaultVOI = cornerstoneVOI;
 
       const viewportProps = [
         {
