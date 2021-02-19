@@ -5,9 +5,6 @@ import id from './id.js';
 import RTPanel from './components/RTPanel/RTPanel';
 import { version } from '../package.json';
 
-import { utils } from '@ohif/core';
-const { studyMetadataManager } = utils;
-
 export default {
   /**
    * Only required property. Should be a unique value across all extensions.
@@ -48,34 +45,24 @@ export default {
           icon: 'list',
           label: 'RTSTRUCT',
           target: 'rt-panel',
-          isDisabled: (studies, activeViewport) => {
+          isDisabled: studies => {
             if (!studies) {
               return true;
             }
 
-            if (activeViewport) {
-              const study = studies.find(
-                s => s.StudyInstanceUID === activeViewport.StudyInstanceUID
-              );
-              const ds = study.displaySets.find(
-                ds =>
-                  ds.displaySetInstanceUID ===
-                  activeViewport.displaySetInstanceUID
-              );
-              const studyMetadata = studyMetadataManager.get(
-                activeViewport.StudyInstanceUID
-              );
-              const referencedDisplaySets = studyMetadata.getDerivedDatasets({
-                referencedSeriesInstanceUID: activeViewport.SeriesInstanceUID,
-                Modality: 'RTSTRUCT',
-              });
-              if (
-                referencedDisplaySets &&
-                referencedDisplaySets.some(ds =>
-                  ['RTSTRUCT'].includes(ds.Modality)
-                )
-              ) {
-                return false;
+            for (let i = 0; i < studies.length; i++) {
+              const study = studies[i];
+
+              if (study && study.series) {
+                for (let j = 0; j < study.series.length; j++) {
+                  const series = study.series[j];
+                  if (
+                    /* Could be expanded to contain RTPLAN and RTDOSE information in the future */
+                    ['RTSTRUCT'].includes(series.Modality)
+                  ) {
+                    return false;
+                  }
+                }
               }
             }
 
