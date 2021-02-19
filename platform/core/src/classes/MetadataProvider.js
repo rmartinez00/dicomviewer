@@ -20,7 +20,6 @@ class MetadataProvider {
       writable: false,
       value: new Map(),
     });
-    this.datasets = {};
   }
 
   async addInstance(dicomJSONDatasetOrP10ArrayBuffer, options = {}) {
@@ -53,7 +52,6 @@ class MetadataProvider {
       SOPInstanceUID,
     } = naturalizedDataset;
 
-    this._getAndCacheStudyDataset(StudyInstanceUID, dicomJSONDataset);
     const study = this._getAndCacheStudy(StudyInstanceUID);
     const series = this._getAndCacheSeriesFromStudy(study, SeriesInstanceUID);
     const instance = this._getAndCacheInstanceFromStudy(series, SOPInstanceUID);
@@ -73,16 +71,6 @@ class MetadataProvider {
     this.imageIdToUIDs.set(imageId, uids);
   }
 
-  _getAndCacheStudyDataset(StudyInstanceUID, dataset) {
-    if (!this.datasets[StudyInstanceUID]) {
-      this.datasets[StudyInstanceUID] = dataset;
-    }
-  }
-
-  getStudyDataset(StudyInstanceUID) {
-    return this.datasets[StudyInstanceUID];
-  }
-
   _getAndCacheStudy(StudyInstanceUID) {
     const studies = this.studies;
 
@@ -95,7 +83,6 @@ class MetadataProvider {
 
     return study;
   }
-
   _getAndCacheSeriesFromStudy(study, SeriesInstanceUID) {
     let series = study.series.get(SeriesInstanceUID);
 
