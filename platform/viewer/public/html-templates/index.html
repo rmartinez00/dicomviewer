@@ -101,12 +101,6 @@
 
       {% if not patient %}
       $(".ToolbarRow").prepend("<div id='home_button' class='toolbar-button'><a><img style='height:25px;filter: contrast(0.4);'src='/assets/favicon-32x32.png'></img></a><br>Estudios</div>");
-      {% if diagnosed %}
-
-      {% else %}
-      $(".ToolbarRow")
-        .append("<div class='toolbar-button'><div id='diagnostico' class='fa fa-address-book' style='font-size:20pt;'></div><br>Reporte</div>");
-      {% endif %}
       {% endif %}
 
       $(".header-studyListLinkSection").attr('href', "#")

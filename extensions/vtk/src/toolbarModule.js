@@ -129,7 +129,7 @@ const definitions = [
   },
   {
     id: '2DMPR',
-    label: 'Recons',
+    label: 'MPR',
     icon: 'cube',
     //
     CustomComponent: VTKMPRToolbarButton,
