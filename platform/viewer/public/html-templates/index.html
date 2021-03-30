@@ -73,18 +73,18 @@
 <div class="filters">
   <span class="disclaimer white">Filtros Rapidos</span>
   <select id="filter" name="select">
-    <option value="" selected>Selecciona Filtro</option>
-    <option value="1">Cabeza y Cuello: Cerebro (Tecla Rapida 1)</option>
-    <option value="2">Cabeza y Cuello: Subdural (Tecla Rapida 2)</option>
-    <option value="3">Cabeza y Cuello: Accidente Cerebrovascular (Tecla Rapida 3)</option>
-    <option value="4">Cabeza y Cuello: Hueso (Tecla Rapida 4)</option>
-    <option value="5">Cabeza y Cuello: Tejidos Blandos (Tecla Rapida 5)</option>
-    <option value="6">Pecho: Pulmones (Tecla Rapida 6)</option>
-    <option value="7">Pecho: Mediastinio (Tecla Rapida 7)</option>
-    <option value="8">Abdomen: Higado (Tecla Rapida 8)</option>
-    <option value="9">Abdomen: Tejidos Blandos (Tecla Rapida 9)</option>
-    <option value="10">Columna: Tejidos Blandos (Tecla Rapida 0)</option>
-    <option value="11">Columna: Hueso (Tecla Rapida q)</option>
+    <option value="" selected>{% trans %}Selecciona Filtro{% endtrans %}</option>
+    <option value="1">{% trans %}P.F (Tecla Rapida 1){% endtrans %}</option>
+    <option value="2">{% trans %}Cerebro (Tecla Rapida 2){% endtrans %}</option>
+    <option value="3">{% trans %}CAI (Tecla Rapida 3){% endtrans %}</option>
+    <option value="4">{% trans %}C.Vert (Tecla Rapida 4){% endtrans %}</option>
+    <option value="5">{% trans %}Hueso (Tecla Rapida 5){% endtrans %}</option>
+    <option value="6">{% trans %}Pulmon (Tecla Rapida 6){% endtrans %}</option>
+    <option value="7">{% trans %}Abdomen (Tecla Rapida 7){% endtrans %}</option>
+    <option value="8">{% trans %}Hígado (Tecla Rapida 8){% endtrans %}</option>
+    <option value="9">{% trans %}Cardíaco (Tecla Rapida 9){% endtrans %}</option>
+    <option value="10">{% trans %}Colon (Tecla Rapida 0){% endtrans %}</option>
+    <option value="11">{% trans %}Colon (Tecla Rapida q){% endtrans %}</option>
   </select>
 </div>
 <div id="loader" class="center"></div>
@@ -100,13 +100,19 @@
     setTimeout(function(){
 
       {% if not patient %}
-      $(".ToolbarRow").prepend("<div id='home_button' class='toolbar-button'><a><img style='height:25px;filter: contrast(0.4);'src='/assets/favicon-32x32.png'></img></a><br>Estudios</div>");
+      $(".ToolbarRow").prepend("<div id='home_button' class='toolbar-button'><a><img style='height:25px;filter: contrast(0.4);'src='/assets/favicon-32x32.png'></img></a><br>{% trans %}Estudios{% endtrans %}</div>");
       {% endif %}
+      {% if patient %}
+        $(".header-studyListLinkSection").attr('href', "#")
+        {% if pdfUrl is not empty %}
+        $(".ToolbarRow")
+          .append("<div class='toolbar-button'><div id='pdf' class='fa fa-file-pdf-o' style='font-size:20pt;'></div><br>{% trans %}PDF{% endtrans %}</div>");
+        {% endif %}
 
-      $(".header-studyListLinkSection").attr('href', "#")
-      {% if diagnosed %}
-      $(".ToolbarRow")
-        .append("<div class='toolbar-button'><div id='pdf' class='fa fa-file-pdf-o' style='font-size:20pt;'></div><br>PDF</div>");
+        {% if zipUrl is not empty %}
+        $(".ToolbarRow")
+          .append("<div class='toolbar-button'><div id='zip' class='fa fa-cloud-download' style='font-size:20pt;'></div><br>{% trans %}Zip{% endtrans %}</div>");
+        {% endif %}
       {% endif %}
 
 
@@ -119,13 +125,23 @@
       });
 
       $("#home_button").click(function(){
-        document.location.href="/";
+        var url = "{{ domain }}";
+        window.open(url, '_blank');
       });
 
       {% if pdfUrl is not empty %}
       $("#pdf").click(function(){
 
         var url = '{{ pdfUrl }}'
+        window.open(url, '_blank');
+
+      });
+      {% endif %}
+
+      {% if zipUrl is not empty and patient %}
+      $("#zip").click(function(){
+
+        var url = '{{ zipUrl }}'
         window.open(url, '_blank');
 
       });
