@@ -67,7 +67,10 @@ class ImageSet {
 
   sortByImagePositionPatient() {
     const images = this.images;
+    if (images[0] === undefined) return;
+
     const referenceImagePositionPatient = _getImagePositionPatient(images[0]);
+    if (referenceImagePositionPatient === undefined) return;
 
     const refIppVec = new Vector3(
       referenceImagePositionPatient[0],
