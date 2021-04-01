@@ -1,19 +1,23 @@
 const defaultState = {
   windowLevelData: {
-    1: { description: 'Head and Neck: brain', window: '35', level: '150' },
-    2: { description: 'Head and Neck: subdural', window: '35', level: '70' },
-    3: { description: 'Head and Neck: stroke', window: '600', level: '4095' },
-    4: { description: 'Head and Neck: Bone', window: '60', level: '300' },
-    5: { description: 'Head and Neck: soft tissues', window: '800', level: '2000' },
-    6: { description: 'Chest: lungs', window: '-600', level: '1600' },
-    7: { description: 'Chest: mediastinium', window: '60', level: '360' },
-    8: { description: 'Abdomen: liver', window: '100', level: '200' },
-    9: { description: 'Abdomen: sof tissues', window: '90', level: '750' },
-    10: { description: 'Spine: soft tissues', window: '0', level: '2000' },
-    11: { description: 'Spine: bone', window: '0', level: '2000' },
+    1: { description: 'Head and Neck: brain', window: '150', level: '35' },
+    2: { description: 'Head and Neck: subdural', window: '70', level: '35' },
+    3: { description: 'Head and Neck: stroke', window: '4095', level: '600' },
+    4: { description: 'Head and Neck: Bone', window: '300', level: '60' },
+    5: {
+      description: 'Head and Neck: soft tissues',
+      window: '2000',
+      level: '800',
+    },
+    6: { description: 'Chest: lungs', window: '1600', level: '-600' },
+    7: { description: 'Chest: mediastinium', window: '360', level: '60' },
+    8: { description: 'Abdomen: liver', window: '200', level: '100' },
+    9: { description: 'Abdomen: sof tissues', window: '750', level: '90' },
+    10: { description: 'Spine: soft tissues', window: '2000', level: '0' },
+    11: { description: 'Spine: bone', window: '2000', level: '0' },
   },
   generalPreferences: {
-     language: 'es'
+    language: 'es',
   },
 };
 
