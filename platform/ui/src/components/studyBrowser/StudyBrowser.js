@@ -12,8 +12,16 @@ function StudyBrowser(props) {
   } = props;
 
   return (
-    <div className="study-browser">
-      <div className="scrollable-study-thumbnails">
+    <div id ="browser"className="study-browser">
+      <div className="scrollButtons">
+        <div class="upButton">
+          <button class="scrollButton" onClick={onUpScrollClick}>↑</button>
+        </div>
+        <div class="downButton">
+          <button class="scrollButton" onClick={onDownScrollClick}>↓</button>
+        </div>
+      </div>
+      <div id="scroll" className="scrollable-study-thumbnails">
         {studies
           .map((study, studyIndex) => {
             const { StudyInstanceUID } = study;
@@ -101,5 +109,24 @@ StudyBrowser.defaultProps = {
   onThumbnailClick: noop,
   onThumbnailDoubleClick: noop,
 };
+
+var a = 0;
+export function onUpScrollClick() {
+  a = a-200;
+  if (a < 0 ) {
+    a = 0;
+  }
+  document.getElementById('scroll').scrollTo({top: a, behavior: 'smooth'});
+}
+
+export function onDownScrollClick() {
+  a = a+200;
+  if (a > parseInt(document.getElementById('browser').scrollHeight)) {
+    a = 50 + parseInt(document.getElementById('browser').scrollHeight);
+  }else {
+    console.log(parseInt(document.getElementById('scroll').scrollHeight));
+  }
+  document.getElementById('scroll').scrollTo({top: a, behavior: 'smooth'});
+}
 
 export { StudyBrowser };
