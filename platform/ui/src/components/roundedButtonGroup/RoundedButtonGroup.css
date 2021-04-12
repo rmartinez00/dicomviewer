@@ -1,4 +1,5 @@
 .RoundedButtonGroup {
+  --radious: 5px;
   --height: 25px;
   position: relative;
   z-index: 0;
@@ -36,7 +37,12 @@
   z-index: 1;
 }
 
-.roundedButtonWrapper .roundedButton svg .roundedButtonWrapper .roundedButton span {
+.roundedButtonWrapper
+  .roundedButton
+  svg
+  .roundedButtonWrapper
+  .roundedButton
+  span {
   margin: 0 2px;
 }
 
@@ -62,13 +68,13 @@
 }
 
 .RoundedButtonGroup .roundedButtonWrapper:first-child .roundedButton {
-  border-bottom-left-radius: var(--height);
-  border-top-left-radius: var(--height);
+  border-bottom-left-radius: var(--radious);
+  border-top-left-radius: var(--radious);
 }
 
 .RoundedButtonGroup .roundedButtonWrapper:last-child .roundedButton {
-  border-bottom-right-radius: var(--height);
-  border-top-right-radius: var(--height);
+  border-bottom-right-radius: var(--radious);
+  border-top-right-radius: var(--radious);
 }
 
 .roundedButtonWrapper:hover .roundedButton {
@@ -81,4 +87,8 @@
   border-color: var(--ui-border-color-active);
   color: var(--ui-gray-dark);
   z-index: 2;
+}
+
+.ViewportOverlay {
+  color: #49bc95 !important;
 }
