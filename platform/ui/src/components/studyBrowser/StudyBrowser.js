@@ -13,14 +13,6 @@ function StudyBrowser(props) {
 
   return (
     <div id ="browser"className="study-browser">
-      <div className="scrollButtons">
-        <div class="upButton">
-          <button class="scrollButton" onClick={onUpScrollClick}>↑</button>
-        </div>
-        <div class="downButton">
-          <button class="scrollButton" onClick={onDownScrollClick}>↓</button>
-        </div>
-      </div>
       <div id="scroll" className="scrollable-study-thumbnails">
         {studies
           .map((study, studyIndex) => {
@@ -75,6 +67,14 @@ function StudyBrowser(props) {
             });
           })
           .flat()}
+      </div>
+      <div className="scrollButtons">
+        <div class="upButton">
+          <button class="scrollButton" onClick={onUpScrollClick}>↑</button>
+        </div>
+        <div class="downButton">
+          <button class="scrollButton" onClick={onDownScrollClick}>↓</button>
+        </div>
       </div>
     </div>
   );

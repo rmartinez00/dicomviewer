@@ -90,5 +90,9 @@
 }
 
 .ViewportOverlay {
-  color: #49bc95 !important;
+  color: #57efa1 !important;
+}
+
+.viewport-wrapper {
+  font-family: ubuntu;
 }
