@@ -123,11 +123,6 @@ export function onUpScrollClick() {
 
 export function onDownScrollClick() {
   a = a+200;
-  if (a > parseInt(document.getElementById('browser').scrollHeight)) {
-    a = 50 + parseInt(document.getElementById('browser').scrollHeight);
-  }else {
-    console.log(parseInt(document.getElementById('scroll').scrollHeight));
-  }
   document.getElementById('scroll').scrollTo({top: a, behavior: 'smooth'});
 }
 
