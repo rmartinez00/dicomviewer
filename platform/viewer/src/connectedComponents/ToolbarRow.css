@@ -1,5 +1,4 @@
 .ToolbarRow {
-  border-bottom: var(--ui-border-thickness) solid var(--ui-border-color);
   flex: 0 0 auto;
   height: var(--toolbar-height);
   padding-left: 1rem;
